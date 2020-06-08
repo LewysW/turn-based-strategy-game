@@ -3,14 +3,15 @@ import java.awt.image.BufferedImage;
 
 public class Territory {
     private String name;
-    private String continent;
     private BufferedImage image;
     private Path2D border;
+    private int numUnits;
 
     public Territory(String name, BufferedImage image, Path2D border) {
         this.name = name;
         this.image = image;
         this.border = border;
+        numUnits = 0;
     }
 
     public String getName() {

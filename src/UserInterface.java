@@ -24,8 +24,6 @@ public class UserInterface extends JPanel {
     public static void main(String[] args) {
         loadAssets();
         display.init();
-        //TODO - create list of territory objects using file extension of each image with an owner attribute, image attribute, and a path2D border attribute
-        //TODO - create continent object with list of each territory and manpower bonus
         //TODO - creat Game object with main game function, pass above attributes to Game
         //TODO - in game function have initial phase
         //TODO - in game function have main game loop, terminated by a victory condition (one player has all territories or has finished missions)
@@ -215,10 +213,12 @@ public class UserInterface extends JPanel {
                 String gameMode = (String) UserInterface.gameModeCombo.getSelectedItem();
                 String territorySelection = (String) UserInterface.territorySelectionCombo.getSelectedItem();
 
-                System.out.println("Number of players: " + numPlayers);
-                System.out.println("Game Mode: " + gameMode);
-                System.out.println("Territory Selection: " + territorySelection);
+                Game game = new Game(continents, numPlayers, gameMode, territorySelection);
 
+                initMap();
+            }
+
+            public void initMap() {
                 gameScreen.frame = new JFrame();
 
                 //Initialise panel to place buttons on

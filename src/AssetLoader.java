@@ -61,7 +61,7 @@ public class AssetLoader {
             if (continent.equals(continentName)) {
                 BufferedImage image = images.get(territory);
                 Path2D border = borders.get(territory);
-                territories.add(new Territory(territory, image, border));
+                territories.add(new Territory(name, image, border));
             }
         }
 
