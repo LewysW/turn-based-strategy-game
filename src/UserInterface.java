@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 
@@ -16,6 +18,25 @@ import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
  * Class to manage the swing user interface
  */
 public class UserInterface extends JPanel {
+
+    /**
+     * Main function to run program,
+     * used to set up user interface
+     * @param args
+     */
+    public static void main(String[] args) {
+        display.init();
+
+        //TODO - get num players, game mode, and territory selection from UI objects
+        //TODO - create list of territory objects using file extension of each image with an owner attribute
+        //TODO - create continent object with list of each territory and manpower bonus
+        //TODO - creat Game object with main game function, pass above attributes to Game
+        //TODO - in game function have initial phase
+        //TODO - in game function have main game loop, terminated by a victory condition (one player has all territories or has finished missions)
+
+    }
+
+
     //JFrame representing the GUI window
     private JFrame frame;
     //Panel to place buttons and checkboxes on
@@ -24,6 +45,7 @@ public class UserInterface extends JPanel {
     //Starts a new game
     private JButton startGame = new JButton("Start Game");
 
+    //Allows the user to mute the music
     private JCheckBox mute = new JCheckBox();
 
     private static UserInterface display = new UserInterface();
@@ -43,19 +65,8 @@ public class UserInterface extends JPanel {
 
     private static final String song = "resources/MUSIC/Die Walküre, WWV 86B - Fantasie.wav";
 
-
-
-    /**
-     * Main function to run program,
-     * used to set up user interface
-     * @param args
-     */
-    public static void main(String[] args) {
-        display.initDisplay();
-    }
-
     //TODO - break down into smaller functions
-    private void initDisplay() {
+    private void init() {
         //Loads in images and borders
         AssetLoader assetLoader = new AssetLoader();
         territoryImages = assetLoader.loadImages();
@@ -96,6 +107,9 @@ public class UserInterface extends JPanel {
         gameMode.setMaximumSize(new Dimension(150, 30));
         territorySelection.setMaximumSize(new Dimension(150, 30));
 
+        //Format buttons and elements of display:
+
+
         Box hBox1 = Box.createHorizontalBox();
         Box hBox2 = Box.createHorizontalBox();
         Box hBox3 = Box.createHorizontalBox();
@@ -117,10 +131,26 @@ public class UserInterface extends JPanel {
 
         JLabel muteLbl = new JLabel("Mute audio ");
 
+        //Adds mute label and check box to display
         hbox4.add(muteLbl);
         hbox4.add(mute);
 
         display.panel.add(hbox4);
+
+
+        //Label for audio slider
+        JLabel sliderLabel = new JLabel("Volume:");
+
+        //Audio slider
+        JSlider audioSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 100);
+        audioSlider.addChangeListener(new SliderListener());
+
+        Box hbox5 = Box.createHorizontalBox();
+
+        hbox.add(sliderLabel);
+        hbox.add(audioSlider);
+
+        display.panel.add(hbox5);
 
         //Specifies border of panel
         display.panel.setBorder(BorderFactory.createLineBorder(Color.gray));
@@ -239,6 +269,27 @@ public class UserInterface extends JPanel {
             }
         }
 
+    }
+
+    /**
+     * Listener for UI slider
+     */
+    static class SliderListener implements ChangeListener {
+        /**
+         * Run if slider's state has been changed
+         * @param e - event to represent slider being adjusted
+         */
+        public void stateChanged(ChangeEvent e) {
+            //Get value of slider
+            JSlider source = (JSlider)e.getSource();
+            //If slider is not currently being adjusted
+            if (!source.getValueIsAdjusting()) {
+                System.out.println(source.getValue());
+
+                double gain = source.getValue() / 100.0;
+                music.setVolume(gain);
+            }
+        }
     }
 
 }
