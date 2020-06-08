@@ -25,4 +25,8 @@ public class Territory {
     public Path2D getBorder() {
         return border;
     }
+
+    public int getNumUnits() {
+        return numUnits;
+    }
 }

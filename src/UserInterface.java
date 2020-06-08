@@ -1,10 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -24,7 +22,6 @@ public class UserInterface extends JPanel {
     public static void main(String[] args) {
         loadAssets();
         display.init();
-        //TODO - creat Game object with main game function, pass above attributes to Game
         //TODO - in game function have initial phase
         //TODO - in game function have main game loop, terminated by a victory condition (one player has all territories or has finished missions)
 
@@ -215,10 +212,10 @@ public class UserInterface extends JPanel {
 
                 Game game = new Game(continents, numPlayers, gameMode, territorySelection);
 
-                initMap();
+                initWorldMap();
             }
 
-            public void initMap() {
+            public void initWorldMap() {
                 gameScreen.frame = new JFrame();
 
                 //Initialise panel to place buttons on

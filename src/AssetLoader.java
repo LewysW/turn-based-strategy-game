@@ -98,7 +98,6 @@ public class AssetLoader {
                     int indexOfExt = file.toString().indexOf(".");
                     int indexOfSlash = file.toString().indexOf("/");
                     String territoryName = file.toString().substring(indexOfSlash + 1, indexOfExt);
-                    System.out.println("Name: " + territoryName + ".png");
                     images.put(territoryName, ImageIO.read(file));
                     file.delete();
                 }
@@ -172,7 +171,6 @@ public class AssetLoader {
                     int indexOfExt = file.toString().indexOf(".");
                     int indexOfSlash = file.toString().indexOf("/");
                     String territoryName = file.toString().substring(indexOfSlash + 1, indexOfExt);
-                    System.out.println("Name: " + territoryName + ".txt");
                     Path2D path = new Path2D.Double();
 
                     BufferedReader br = Files.newBufferedReader(file.toPath());

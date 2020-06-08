@@ -18,6 +18,23 @@ public class Game {
 
             System.out.println("Player: " + players.get(i).getColour().name());
         }
+
+        for (Continent continent : continents) {
+            System.out.println("Continent: " + continent.getName());
+            System.out.println("Bonus: " + continent.getBonus());
+            for (Territory territory : continent.getTerritories()) {
+                System.out.println("    Territory: " + territory.getName());
+                System.out.println("        Units: " + territory.getNumUnits());
+            }
+        }
+    }
+
+    public void run() {
+
+    }
+
+    public void assignTerritories() {
+        
     }
 
 }
