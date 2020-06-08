@@ -19,6 +19,54 @@ public class AssetLoader {
      */
     private static final int BUFFER_SIZE = 4096;
 
+    public ArrayList<Continent> loadContinents() {
+        String[] continentNames = {"NORTH_AMERICA", "EUROPE", "AFRICA", "ASIA", "SOUTH_AMERICA", "AUSTRALASIA"};
+        ArrayList<Continent> continents = new ArrayList<>();
+        LinkedHashMap<String, BufferedImage> images = loadImages();
+        LinkedHashMap<String, Path2D> borders = loadBorders();
+
+        for (String continent : continentNames) {
+            ArrayList<Territory> territories = loadTerritories(continent, images, borders);
+
+            switch (continent) {
+                case "AUSTRALASIA":
+                case "SOUTH_AMERICA":
+                    continents.add(new Continent(continent, territories, 2));
+                    break;
+                case "AFRICA":
+                    continents.add(new Continent(continent, territories, 3));
+                    break;
+                case "NORTH_AMERICA":
+                case "EUROPE":
+                    continents.add(new Continent(continent, territories, 5));
+                    break;
+                case "ASIA":
+                    continents.add(new Continent(continent, territories, 7));
+            }
+        }
+
+        return continents;
+    }
+
+    public ArrayList<Territory> loadTerritories(String continent, LinkedHashMap<String, BufferedImage> images,
+                                                LinkedHashMap<String, Path2D> borders) {
+        ArrayList<Territory> territories = new ArrayList<>();
+
+        for (String territory : images.keySet()) {
+            int indexOfSlash = territory.indexOf("/");
+
+            String continentName = territory.substring(0, indexOfSlash);
+            String name = territory.substring(indexOfSlash + 1);
+
+            if (continent.equals(continentName)) {
+                BufferedImage image = images.get(territory);
+                Path2D border = borders.get(territory);
+                territories.add(new Territory(territory, image, border));
+            }
+        }
+
+        return territories;
+    }
 
     public LinkedHashMap<String, BufferedImage> loadImages() {
         LinkedHashMap<String, BufferedImage> images = new LinkedHashMap<>();
@@ -34,7 +82,6 @@ public class AssetLoader {
                     int indexOfExt = file.toString().indexOf(".");
                     int indexOfSlash = file.toString().lastIndexOf("/");
                     String continent = file.toString().substring(indexOfSlash + 1, indexOfExt);
-                    System.out.println("Continent: " + continent);
                     unzip(file.toString(), "resources/" + continent + "/");
                 }
             }
@@ -51,7 +98,7 @@ public class AssetLoader {
                     int indexOfExt = file.toString().indexOf(".");
                     int indexOfSlash = file.toString().indexOf("/");
                     String territoryName = file.toString().substring(indexOfSlash + 1, indexOfExt);
-                    System.out.println("Name: " + territoryName);
+                    System.out.println("Name: " + territoryName + ".png");
                     images.put(territoryName, ImageIO.read(file));
                     file.delete();
                 }
@@ -125,7 +172,7 @@ public class AssetLoader {
                     int indexOfExt = file.toString().indexOf(".");
                     int indexOfSlash = file.toString().indexOf("/");
                     String territoryName = file.toString().substring(indexOfSlash + 1, indexOfExt);
-
+                    System.out.println("Name: " + territoryName + ".txt");
                     Path2D path = new Path2D.Double();
 
                     BufferedReader br = Files.newBufferedReader(file.toPath());
@@ -136,7 +183,6 @@ public class AssetLoader {
 
                     while ((line = br.readLine()) != null) {
                         String[] coords = line.split(",");
-                        System.out.println("Coord: " + coords[0] + "," + coords[1]);
                         path.lineTo(Double.parseDouble(coords[0]), Double.parseDouble(coords[1]));
                     }
 

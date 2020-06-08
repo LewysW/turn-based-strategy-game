@@ -1,44 +1,27 @@
-public enum Territory {
-    congo,
-    east_africa,
-    egypt,
-    madagascar,
-    north_africa,
-    southern_africa,
-    afghanistan,
-    china,
-    india,
-    irkutsk,
-    japan,
-    kamchatka,
-    middle_east,
-    mongolia,
-    siam,
-    siberia,
-    ural,
-    yakutsk,
-    eastern_australia,
-    indonesia,
-    new_guinea,
-    western_australia,
-    great_britain,
-    iceland,
-    northern_europe,
-    scandinavia,
-    southern_europe,
-    ukraine,
-    western_europe,
-    alaska,
-    alberta,
-    central_america,
-    eastern_united_states,
-    greenland,
-    northwest_territories,
-    ontario,
-    quebec,
-    western_united_states,
-    argentina,
-    brazil,
-    peru,
-    venezuela
+import java.awt.geom.Path2D;
+import java.awt.image.BufferedImage;
+
+public class Territory {
+    private String name;
+    private String continent;
+    private BufferedImage image;
+    private Path2D border;
+
+    public Territory(String name, BufferedImage image, Path2D border) {
+        this.name = name;
+        this.image = image;
+        this.border = border;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public BufferedImage getImage() {
+        return image;
+    }
+
+    public Path2D getBorder() {
+        return border;
+    }
 }

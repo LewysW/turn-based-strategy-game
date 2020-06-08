@@ -3,12 +3,9 @@ import java.awt.event.*;
 import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -25,10 +22,9 @@ public class UserInterface extends JPanel {
      * @param args
      */
     public static void main(String[] args) {
+        loadAssets();
         display.init();
-
-        //TODO - get num players, game mode, and territory selection from UI objects
-        //TODO - create list of territory objects using file extension of each image with an owner attribute
+        //TODO - create list of territory objects using file extension of each image with an owner attribute, image attribute, and a path2D border attribute
         //TODO - create continent object with list of each territory and manpower bonus
         //TODO - creat Game object with main game function, pass above attributes to Game
         //TODO - in game function have initial phase
@@ -51,29 +47,34 @@ public class UserInterface extends JPanel {
     private static UserInterface display = new UserInterface();
     private static UserInterface gameScreen = new UserInterface();
 
+    private static JComboBox<String> numPlayersCombo = new JComboBox<>();
+    private static JComboBox<String> gameModeCombo = new JComboBox<>();
+    private static JComboBox<String> territorySelectionCombo = new JComboBox<>();
+
     private boolean menu = false;
 
     //Resolution of display
     private static final int WIDTH = 1920;
     private static final int HEIGHT = 1080;
 
-    private static LinkedHashMap<String, BufferedImage> territoryImages = new LinkedHashMap<>();
-    private static LinkedHashMap<String, Path2D> borders = new LinkedHashMap<>();
+    private static ArrayList<Continent> continents = new ArrayList<>();
     private static BufferedImage background;
 
     private static Music music;
 
     private static final String song = "resources/MUSIC/Die Walküre, WWV 86B - Fantasie.wav";
 
-    //TODO - break down into smaller functions
-    private void init() {
+    private static void loadAssets() {
         //Loads in images and borders
         AssetLoader assetLoader = new AssetLoader();
-        territoryImages = assetLoader.loadImages();
-        borders = assetLoader.loadBorders();
+
+        continents = assetLoader.loadContinents();
         background = assetLoader.loadMenuArt();
+    }
 
 
+    //TODO - break down into smaller functions
+    private void init() {
         display.frame = new JFrame();
 
         //Initialise panel to place buttons on
@@ -99,13 +100,13 @@ public class UserInterface extends JPanel {
         JLabel gameModeLbl = new JLabel("Game Mode ");
         JLabel territorySelectionLbl = new JLabel("Territory Selection ");
 
-        JComboBox<String> numPlayers = new JComboBox<>(numPlayersText);
-        JComboBox<String> gameMode = new JComboBox<>(gameModeText);
-        JComboBox<String> territorySelection = new JComboBox<>(territorySelectionText);
+        numPlayersCombo = new JComboBox<>(numPlayersText);
+        gameModeCombo = new JComboBox<>(gameModeText);
+        territorySelectionCombo = new JComboBox<>(territorySelectionText);
 
-        numPlayers.setMaximumSize(new Dimension(150, 30));
-        gameMode.setMaximumSize(new Dimension(150, 30));
-        territorySelection.setMaximumSize(new Dimension(150, 30));
+        numPlayersCombo.setMaximumSize(new Dimension(150, 30));
+        gameModeCombo.setMaximumSize(new Dimension(150, 30));
+        territorySelectionCombo.setMaximumSize(new Dimension(150, 30));
 
         //Format buttons and elements of display:
 
@@ -115,13 +116,13 @@ public class UserInterface extends JPanel {
         Box hBox3 = Box.createHorizontalBox();
 
         hBox1.add(numPlayersLbl);
-        hBox1.add(numPlayers);
+        hBox1.add(numPlayersCombo);
 
         hBox2.add(gameModeLbl);
-        hBox2.add(gameMode);
+        hBox2.add(gameModeCombo);
 
         hBox3.add(territorySelectionLbl);
-        hBox3.add(territorySelection);
+        hBox3.add(territorySelectionCombo);
 
         display.panel.add(hBox1);
         display.panel.add(hBox2);
@@ -192,9 +193,11 @@ public class UserInterface extends JPanel {
             public void mousePressed(MouseEvent e) {
                 System.out.println(e.getX() + ", " + e.getY());
 
-                for (String name : borders.keySet()) {
-                    if (borders.get(name).contains(new Point2D.Double(e.getX(), e.getY()))) {
-                        System.out.println(name + " has been clicked!");
+                for (Continent continent : continents) {
+                    for (Territory territory : continent.getTerritories()) {
+                        if (territory.getBorder().contains(new Point2D.Double(e.getX(), e.getY()))) {
+                            System.out.println(territory.getName() + " has been clicked!");
+                        }
                     }
                 }
             }
@@ -207,6 +210,15 @@ public class UserInterface extends JPanel {
                     display.frame.dispose();
                 }
 
+                //Get game settings from display
+                int numPlayers = Integer.parseInt((String) UserInterface.numPlayersCombo.getSelectedItem());
+                String gameMode = (String) UserInterface.gameModeCombo.getSelectedItem();
+                String territorySelection = (String) UserInterface.territorySelectionCombo.getSelectedItem();
+
+                System.out.println("Number of players: " + numPlayers);
+                System.out.println("Game Mode: " + gameMode);
+                System.out.println("Territory Selection: " + territorySelection);
+
                 gameScreen.frame = new JFrame();
 
                 //Initialise panel to place buttons on
@@ -217,6 +229,7 @@ public class UserInterface extends JPanel {
                 gameScreen.frame.setTitle("Where is New Zealand?!");
                 gameScreen.frame.setSize(WIDTH, HEIGHT);
                 Container contentPane = gameScreen.frame.getContentPane();
+
                 contentPane.add(gameScreen, BorderLayout.CENTER);
 
                 //Sets frame to visible
@@ -226,21 +239,15 @@ public class UserInterface extends JPanel {
                 gameScreen.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
                 //Sets resizable to false for the window
                 gameScreen.frame.setResizable(false);
-
-                //Display
-                gameScreen.repaint();
             }
         });
 
         mute.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                System.out.println("Called!");
                 if (mute.isSelected()) {
-                    System.out.println("Selected!");
                     music.stopSong();
                 } else {
-                    System.out.println("Not selected!");
                     music.playSong(song);
                 }
             }
@@ -259,13 +266,13 @@ public class UserInterface extends JPanel {
         if (menu) {
             graphics2D.drawImage(background, 0, 0, null);
         } else {
-            for (BufferedImage img : territoryImages.values()) {
-                graphics2D.drawImage(img, 100, -25, null);
-            }
-
             graphics2D.setColor(Color.RED);
-            for (Path2D path2D : borders.values()) {
-                graphics2D.draw(path2D);
+            for (Continent continent : continents) {
+                for (Territory territory : continent.getTerritories()) {
+                    graphics2D.drawImage(territory.getImage(), 100, -25, null);
+                    graphics2D.draw(territory.getBorder());
+
+                }
             }
         }
 
