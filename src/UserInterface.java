@@ -182,6 +182,7 @@ public class UserInterface extends JPanel {
         //Exits program on window being closed
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
+
                 System.exit(0);
             }
         });
