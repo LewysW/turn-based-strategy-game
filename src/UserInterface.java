@@ -28,6 +28,9 @@ public class UserInterface extends JPanel {
     }
 
 
+    //Object representing the game
+    private static Game game;
+
     //JFrame representing the GUI window
     private JFrame frame;
     //Panel to place buttons and checkboxes on
@@ -38,6 +41,9 @@ public class UserInterface extends JPanel {
 
     //Allows the user to mute the music
     private JCheckBox mute = new JCheckBox();
+
+    //Slider to allow user to adjust the audio volume
+    private static JSlider audioSlider;
 
     private static UserInterface display = new UserInterface();
     private static UserInterface gameScreen = new UserInterface();
@@ -138,7 +144,7 @@ public class UserInterface extends JPanel {
         JLabel sliderLabel = new JLabel("Volume:");
 
         //Audio slider
-        JSlider audioSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 100);
+        audioSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 100);
         audioSlider.addChangeListener(new SliderListener());
 
         Box hbox5 = Box.createHorizontalBox();
@@ -210,9 +216,11 @@ public class UserInterface extends JPanel {
                 String gameMode = (String) UserInterface.gameModeCombo.getSelectedItem();
                 String territorySelection = (String) UserInterface.territorySelectionCombo.getSelectedItem();
 
-                Game game = new Game(continents, numPlayers, gameMode, territorySelection);
+                game = new Game(continents, numPlayers, gameMode, territorySelection);
 
                 initWorldMap();
+
+                game.run();
             }
 
             public void initWorldMap() {
@@ -246,6 +254,7 @@ public class UserInterface extends JPanel {
                     music.stopSong();
                 } else {
                     music.playSong(song);
+                    music.setVolume(audioSlider.getValue() / 100.0);
                 }
             }
         });
@@ -267,8 +276,7 @@ public class UserInterface extends JPanel {
             for (Continent continent : continents) {
                 for (Territory territory : continent.getTerritories()) {
                     graphics2D.drawImage(territory.getImage(), 100, -25, null);
-                    graphics2D.draw(territory.getBorder());
-
+                    //graphics2D.draw(territory.getBorder());
                 }
             }
         }

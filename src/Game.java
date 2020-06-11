@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
 public class Game {
     private ArrayList<Continent> continents;
@@ -6,6 +8,7 @@ public class Game {
     private boolean domination;
     private boolean autoSelection;
     private int turn;
+    private State state;
 
     public Game(ArrayList<Continent> continents, int numPlayers, String gameMode, String territorySelection) {
         this.continents = continents;
@@ -27,14 +30,51 @@ public class Game {
                 System.out.println("        Units: " + territory.getNumUnits());
             }
         }
+
+        state = State.TERRITORY_SELECTION;
     }
 
     public void run() {
+        if (autoSelection) {
+            assignTerritories(players);
+        } else {
+            //TODO - manual assignment
+        }
+
 
     }
 
-    public void assignTerritories() {
-        
+    public void assignTerritories(ArrayList<Player> players) {
+        ArrayList<Territory> territories = new ArrayList<>();
+
+        //Add all territories to list
+        for (Continent continent : continents) {
+            territories.addAll(continent.getTerritories());
+        }
+
+        int playerIndex = 0;
+
+        while (!territories.isEmpty()) {
+            Random rand = new Random();
+            int numTerritories = territories.size();
+
+            //Generate random territory
+            int intRandom = rand.nextInt(numTerritories);
+
+            //Assign territory to player
+            players.get(playerIndex++).addTerritory(territories.get(intRandom));
+
+            //Remove territory from list of territories
+            territories.remove(intRandom);
+
+            //Wrap around to first player
+            if (playerIndex >= players.size()) {
+                playerIndex = 0;
+            }
+        }
     }
 
+    public State getState() {
+        return state;
+    }
 }
