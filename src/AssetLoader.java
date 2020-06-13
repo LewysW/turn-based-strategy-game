@@ -196,6 +196,10 @@ public class AssetLoader {
         return borders;
     }
 
+    /**
+     * Loads the menu art
+     * @return - a buffered image representing the menu art
+     */
     public BufferedImage loadMenuArt() {
         try {
             return ImageIO.read(new File("resources/MENU/ChargeOfTheLightBrigade.jpg"));
@@ -204,5 +208,46 @@ public class AssetLoader {
         }
 
         return null;
+    }
+
+    /**
+     * Loads icons for each colour player
+     * @return - a map of colours to soldier images corresponding to those colours
+     */
+    public LinkedHashMap<Colour, BufferedImage> loadSoldiers() {
+        LinkedHashMap<Colour, BufferedImage> soldiers = new LinkedHashMap<>();
+
+        try {
+            String dir = "resources/SOLDIERS/";
+            unzip(dir + "SOLDIERS.zip", dir);
+
+            //Crawls files
+            List<File> filesInFolder = Files.walk(Paths.get("resources/SOLDIERS"))
+                    .filter(Files::isRegularFile)
+                    .map(Path::toFile)
+                    .collect(Collectors.toList());
+
+            //For each soldier icon file
+            for (File file : filesInFolder) {
+                //Check it is a valid png image
+                if (file.toString().endsWith(".png")) {
+                    int indexOfExt = file.toString().indexOf(".");
+                    int indexOfSlash = file.toString().lastIndexOf("/");
+                    String colour = file.toString().substring(indexOfSlash + 1, indexOfExt);
+
+                    //Assign soldier icon to correct colour
+                    for (Colour c : Colour.values()) {
+                        if (colour.toUpperCase().equals(c.name())) {
+                            soldiers.put(c, ImageIO.read(file));
+                            file.delete();
+                        }
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return soldiers;
     }
 }

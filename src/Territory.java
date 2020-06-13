@@ -29,4 +29,12 @@ public class Territory {
     public int getNumUnits() {
         return numUnits;
     }
+
+    public void incrementUnits() {
+        numUnits++;
+    }
+
+    public void decrementUnits() {
+        numUnits--;
+    }
 }

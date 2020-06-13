@@ -61,6 +61,8 @@ public class Game {
             //Generate random territory
             int intRandom = rand.nextInt(numTerritories);
 
+            //Adds a unit to the territory
+            territories.get(intRandom).incrementUnits();
             //Assign territory to player
             players.get(playerIndex++).addTerritory(territories.get(intRandom));
 
@@ -76,5 +78,9 @@ public class Game {
 
     public State getState() {
         return state;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
     }
 }

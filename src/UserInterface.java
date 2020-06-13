@@ -3,6 +3,7 @@ import java.awt.event.*;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -58,8 +59,10 @@ public class UserInterface extends JPanel {
     private static final int WIDTH = 1920;
     private static final int HEIGHT = 1080;
 
+    //Variables to store loaded images and related data
     private static ArrayList<Continent> continents = new ArrayList<>();
     private static BufferedImage background;
+    private static LinkedHashMap<Colour, BufferedImage> soldiers;
 
     private static Music music;
 
@@ -71,6 +74,7 @@ public class UserInterface extends JPanel {
 
         continents = assetLoader.loadContinents();
         background = assetLoader.loadMenuArt();
+        soldiers = assetLoader.loadSoldiers();
     }
 
 
@@ -273,11 +277,31 @@ public class UserInterface extends JPanel {
         if (menu) {
             graphics2D.drawImage(background, 0, 0, null);
         } else {
-            graphics2D.setColor(Color.RED);
+            //Fill background of display
+            graphics2D.setColor(new Color(30, 140, 168));
+            graphics2D.fillRect(0, 0, 1920, 1080);
+            //Draws the image for each territory
             for (Continent continent : continents) {
                 for (Territory territory : continent.getTerritories()) {
                     graphics2D.drawImage(territory.getImage(), 100, -25, null);
-                    //graphics2D.draw(territory.getBorder());
+                }
+            }
+
+            //Draws a soldier icon of a particular colour in each territory occupied by the current player
+            for (Player player : game.getPlayers()) {
+                for (Territory territory : player.getTerritories().values()) {
+                    //Gets the rectangle encompassing the territory
+                    Rectangle bounds = territory.getBorder().getBounds();
+
+                    //Gets the middle coordinate of the territory
+                    double x = bounds.x + (bounds.getWidth() / 2);
+                    double y = bounds.y + (bounds.getHeight() / 2) - 20;
+
+                    System.out.println("x: " + x);
+                    System.out.println("y: " + y);
+                    BufferedImage soldier = soldiers.get(player.getColour());
+
+                    graphics2D.drawImage(soldier, (int) x, (int) y, soldier.getWidth() / 4, soldier.getHeight() / 4, null);
                 }
             }
         }
