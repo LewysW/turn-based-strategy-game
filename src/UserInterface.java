@@ -288,19 +288,14 @@ public class UserInterface extends JPanel {
                 }
             }
 
+            //TODO - move to function
             //Draws a soldier icon of a particular colour in each territory occupied by the current player
             for (Player player : game.getPlayers()) {
                 for (Territory territory : player.getTerritories().values()) {
-                    //Gets the rectangle encompassing the territory
-                    Rectangle bounds = territory.getBorder().getBounds();
-
-                    //Gets the middle coordinate of the territory
-                    double x = bounds.x + (bounds.getWidth() / 2);
-                    double y = bounds.y + (bounds.getHeight() / 2) - 20;
-
-                    System.out.println("x: " + x);
-                    System.out.println("y: " + y);
                     BufferedImage soldier = soldiers.get(player.getColour());
+
+                    double x = territory.getTroopCoord().getX() - 10;
+                    double y = territory.getTroopCoord().getY() - 40;
 
                     //Draw soldier
                     graphics2D.drawImage(soldier, (int) x, (int) y, soldier.getWidth() / 4, soldier.getHeight() / 4, null);

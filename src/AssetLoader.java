@@ -1,5 +1,6 @@
 import javax.imageio.ImageIO;
 import java.awt.geom.Path2D;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
@@ -24,9 +25,10 @@ public class AssetLoader {
         ArrayList<Continent> continents = new ArrayList<>();
         LinkedHashMap<String, BufferedImage> images = loadImages();
         LinkedHashMap<String, Path2D> borders = loadBorders();
+        LinkedHashMap<String, Point2D> troopCoords = loadTroopCoords();
 
         for (String continent : continentNames) {
-            ArrayList<Territory> territories = loadTerritories(continent, images, borders);
+            ArrayList<Territory> territories = loadTerritories(continent, images, borders, troopCoords);
 
             switch (continent) {
                 case "AUSTRALASIA":
@@ -49,7 +51,7 @@ public class AssetLoader {
     }
 
     public ArrayList<Territory> loadTerritories(String continent, LinkedHashMap<String, BufferedImage> images,
-                                                LinkedHashMap<String, Path2D> borders) {
+                                                LinkedHashMap<String, Path2D> borders, LinkedHashMap<String, Point2D> troopCoords) {
         ArrayList<Territory> territories = new ArrayList<>();
 
         for (String territory : images.keySet()) {
@@ -61,7 +63,8 @@ public class AssetLoader {
             if (continent.equals(continentName)) {
                 BufferedImage image = images.get(territory);
                 Path2D border = borders.get(territory);
-                territories.add(new Territory(name, image, border));
+                Point2D troopCoord = troopCoords.get(territory);
+                territories.add(new Territory(name, image, border, troopCoord));
             }
         }
 
@@ -157,6 +160,10 @@ public class AssetLoader {
         bos.close();
     }
 
+    /**
+     * Load borders of each country
+     * @return borders as LinkedHashMap of territory names to Path2D objects
+     */
     public LinkedHashMap<String, Path2D> loadBorders() {
         LinkedHashMap<String, Path2D> borders = new LinkedHashMap<>();
         try {
@@ -174,7 +181,13 @@ public class AssetLoader {
                     Path2D path = new Path2D.Double();
 
                     BufferedReader br = Files.newBufferedReader(file.toPath());
+
+                    //Skips over troop coordinate of country
                     String line = br.readLine();
+
+                    //Get first coordinate in border of country
+                    line = br.readLine();
+
                     double startX = Double.parseDouble(line.split(",")[0]);
                     double startY = Double.parseDouble(line.split(",")[1]);
                     path.moveTo(startX, startY);
@@ -194,6 +207,45 @@ public class AssetLoader {
         }
 
         return borders;
+    }
+
+    /**
+     * Load location in territory to display soldier icon
+     * @return coordinates to display troop icon in each territory
+     */
+    public LinkedHashMap<String, Point2D> loadTroopCoords() {
+        LinkedHashMap<String, Point2D> troopCoords = new LinkedHashMap<>();
+        try {
+            List<File> filesInFolder = Files.walk(Paths.get("resources/"))
+                    .filter(Files::isRegularFile)
+                    .map(Path::toFile)
+                    .collect(Collectors.toList());
+
+            for (File file : filesInFolder) {
+                if (file.toString().endsWith(".txt")) {
+                    //Gets name of file before '.txt'
+                    int indexOfExt = file.toString().indexOf(".");
+                    int indexOfSlash = file.toString().indexOf("/");
+
+                    String territoryName = file.toString().substring(indexOfSlash + 1, indexOfExt);
+
+                    BufferedReader br = Files.newBufferedReader(file.toPath());
+
+                    //Gets troop coordinate of territory
+                    String line = br.readLine();
+
+                    double troopX = Double.parseDouble(line.split(",")[0]);
+                    double troopY = Double.parseDouble(line.split(",")[1]);
+
+                    troopCoords.put(territoryName, new Point2D.Double(troopX, troopY));
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return troopCoords;
     }
 
     /**

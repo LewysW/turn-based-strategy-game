@@ -1,4 +1,5 @@
 import java.awt.geom.Path2D;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 
 public class Territory {
@@ -6,12 +7,14 @@ public class Territory {
     private BufferedImage image;
     private Path2D border;
     private int numUnits;
+    private Point2D troopCoord;
 
-    public Territory(String name, BufferedImage image, Path2D border) {
+    public Territory(String name, BufferedImage image, Path2D border, Point2D troopCoord) {
         this.name = name;
         this.image = image;
         this.border = border;
-        numUnits = 0;
+        this.numUnits = 0;
+        this.troopCoord = troopCoord;
     }
 
     public String getName() {
@@ -28,6 +31,10 @@ public class Territory {
 
     public int getNumUnits() {
         return numUnits;
+    }
+
+    public Point2D getTroopCoord() {
+        return troopCoord;
     }
 
     public void incrementUnits() {
