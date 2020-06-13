@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="044007da-0a2d-4dbe-b825-8131c3fae1fb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/strategy-game/UserInterface$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/strategy-game/UserInterface$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/strategy-game/UserInterface$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/strategy-game/UserInterface$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/strategy-game/UserInterface$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/strategy-game/UserInterface$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/strategy-game/UserInterface$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/strategy-game/UserInterface$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/strategy-game/UserInterface$SliderListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/strategy-game/UserInterface$SliderListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/strategy-game/UserInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/strategy-game/UserInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AssetLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AssetLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Territory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Territory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/SOLDIERS/SOLDIERS.zip" beforeDir="false" afterPath="$PROJECT_DIR$/resources/SOLDIERS/SOLDIERS.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Colour.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Colour.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -40,8 +32,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/UserInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="215">
-              <caret line="279" column="40" selection-start-line="279" selection-start-column="40" selection-end-line="279" selection-end-column="40" />
+            <state relative-caret-position="111">
+              <caret line="314" column="82" selection-start-line="314" selection-start-column="82" selection-end-line="314" selection-end-column="82" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -155,7 +147,7 @@
         <entry file="file://$PROJECT_DIR$/src/Colour.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="90">
-              <caret line="6" column="9" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
+              <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -176,9 +168,11 @@
       <find>World</find>
       <find>slider</find>
       <find>loadImages</find>
+      <find>g2</find>
     </findStrings>
     <replaceStrings>
       <replace>gameScreen</replace>
+      <replace>graphics2D</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -190,7 +184,6 @@
         <option value="$PROJECT_DIR$/src/Continents.java" />
         <option value="$PROJECT_DIR$/src/Territories.java" />
         <option value="$PROJECT_DIR$/src/Music.java" />
-        <option value="$PROJECT_DIR$/src/Colour.java" />
         <option value="$PROJECT_DIR$/src/Card.java" />
         <option value="$PROJECT_DIR$/src/CardType.java" />
         <option value="$PROJECT_DIR$/src/Continent.java" />
@@ -199,6 +192,7 @@
         <option value="$PROJECT_DIR$/src/State.java" />
         <option value="$PROJECT_DIR$/src/Territory.java" />
         <option value="$PROJECT_DIR$/src/Game.java" />
+        <option value="$PROJECT_DIR$/src/Colour.java" />
         <option value="$PROJECT_DIR$/src/UserInterface.java" />
       </list>
     </option>
@@ -242,7 +236,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1592008904875" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1592013929339" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -300,12 +294,12 @@
       <workItem from="1591568961439" duration="7789000" />
       <workItem from="1591620474946" duration="13362000" />
       <workItem from="1591812533849" duration="4477000" />
-      <workItem from="1592003891606" duration="4810000" />
+      <workItem from="1592003891606" duration="9712000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71415000" />
+    <option name="totallyTimeSpent" value="76317000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="-1" width="1920" height="1080" extended-state="6" />
@@ -320,7 +314,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3294979" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.73849374" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.73849374" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39958158" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -400,34 +394,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Colour.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="9" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/State.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="23" selection-start-line="1" selection-start-column="23" selection-end-line="1" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="52" selection-start-line="6" selection-start-column="52" selection-end-line="6" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AssetLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="214" column="82" selection-start-line="214" selection-start-column="82" selection-end-line="214" selection-end-column="82" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -450,6 +420,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/AssetLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="214" column="82" selection-start-line="214" selection-start-column="82" selection-end-line="214" selection-end-column="82" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/State.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="23" selection-start-line="1" selection-start-column="23" selection-end-line="1" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Game.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="531">
@@ -464,10 +451,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Colour.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/UserInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="279" column="40" selection-start-line="279" selection-start-column="40" selection-end-line="279" selection-end-column="40" />
+        <state relative-caret-position="111">
+          <caret line="314" column="82" selection-start-line="314" selection-start-column="82" selection-end-line="314" selection-end-column="82" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

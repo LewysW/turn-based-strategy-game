@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.font.GlyphVector;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -301,7 +302,17 @@ public class UserInterface extends JPanel {
                     System.out.println("y: " + y);
                     BufferedImage soldier = soldiers.get(player.getColour());
 
+                    //Draw soldier
                     graphics2D.drawImage(soldier, (int) x, (int) y, soldier.getWidth() / 4, soldier.getHeight() / 4, null);
+
+                    //Draw number of units
+                    graphics2D.setColor(Color.WHITE);
+                    graphics2D.setFont(new Font("TimesRoman", Font.BOLD, 12));
+
+                    double textX = (territory.getNumUnits() < 10) ? x + 5 : x;
+                    double textY = y + 50;
+
+                    graphics2D.drawString(Integer.toString(territory.getNumUnits()), (int) textX, (int) textY);
                 }
             }
         }
