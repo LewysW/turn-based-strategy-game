@@ -24,9 +24,6 @@ public class UserInterface extends JPanel {
     public static void main(String[] args) {
         loadAssets();
         display.init();
-        //TODO - in game function have initial phase
-        //TODO - in game function have main game loop, terminated by a victory condition (one player has all territories or has finished missions)
-
     }
 
 
@@ -199,12 +196,11 @@ public class UserInterface extends JPanel {
             @Override //I override only one method for presentation
             public void mousePressed(MouseEvent e) {
                 System.out.println(e.getX() + ", " + e.getY());
+                if (game.getState() == State.TERRITORY_SELECTION || game.getState() == State.TROOP_DEPLOYMENT) {
+                    boolean deployed = game.deployUnit(new Point2D.Double(e.getX(), e.getY()));
 
-                for (Continent continent : continents) {
-                    for (Territory territory : continent.getTerritories()) {
-                        if (territory.getBorder().contains(new Point2D.Double(e.getX(), e.getY()))) {
-                            System.out.println(territory.getName() + " has been clicked!");
-                        }
+                    if (deployed) {
+                        repaint();
                     }
                 }
             }
@@ -327,8 +323,6 @@ public class UserInterface extends JPanel {
             JSlider source = (JSlider)e.getSource();
             //If slider is not currently being adjusted
             if (!source.getValueIsAdjusting()) {
-                System.out.println(source.getValue());
-
                 double gain = source.getValue() / 100.0;
                 music.setVolume(gain);
             }

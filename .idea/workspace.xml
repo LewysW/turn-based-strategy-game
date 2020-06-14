@@ -3,51 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="044007da-0a2d-4dbe-b825-8131c3fae1fb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/AFRICA/congo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/AFRICA/congo.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/AFRICA/east_africa.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/AFRICA/east_africa.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/AFRICA/egypt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/AFRICA/egypt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/AFRICA/madagascar.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/AFRICA/madagascar.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/AFRICA/north_africa.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/AFRICA/north_africa.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/AFRICA/southern_africa.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/AFRICA/southern_africa.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ASIA/afghanistan.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ASIA/afghanistan.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ASIA/china.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ASIA/china.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ASIA/india.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ASIA/india.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ASIA/irkutsk.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ASIA/irkutsk.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ASIA/japan.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ASIA/japan.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ASIA/kamchatka.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ASIA/kamchatka.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ASIA/middle_east.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ASIA/middle_east.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ASIA/mongolia.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ASIA/mongolia.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ASIA/siam.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ASIA/siam.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ASIA/siberia.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ASIA/siberia.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ASIA/ural.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ASIA/ural.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ASIA/yakutsk.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ASIA/yakutsk.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/AUSTRALASIA/eastern_australia.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/AUSTRALASIA/eastern_australia.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/AUSTRALASIA/indonesia.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/AUSTRALASIA/indonesia.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/AUSTRALASIA/new_guinea.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/AUSTRALASIA/new_guinea.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/AUSTRALASIA/western_australia.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/AUSTRALASIA/western_australia.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/EUROPE/great_britain.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/EUROPE/great_britain.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/EUROPE/iceland.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/EUROPE/iceland.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/EUROPE/northern_europe.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/EUROPE/northern_europe.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/EUROPE/scandinavia.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/EUROPE/scandinavia.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/EUROPE/southern_europe.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/EUROPE/southern_europe.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/EUROPE/ukraine.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/EUROPE/ukraine.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/EUROPE/western_europe.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/EUROPE/western_europe.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/NORTH_AMERICA/alaska.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/NORTH_AMERICA/alaska.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/NORTH_AMERICA/alberta.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/NORTH_AMERICA/alberta.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/NORTH_AMERICA/central_america.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/NORTH_AMERICA/central_america.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/NORTH_AMERICA/eastern_united_states.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/NORTH_AMERICA/eastern_united_states.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/NORTH_AMERICA/greenland.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/NORTH_AMERICA/greenland.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/NORTH_AMERICA/northwest_territories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/NORTH_AMERICA/northwest_territories.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/NORTH_AMERICA/ontario.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/NORTH_AMERICA/ontario.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/NORTH_AMERICA/quebec.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/NORTH_AMERICA/quebec.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/NORTH_AMERICA/western_united_states.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/NORTH_AMERICA/western_united_states.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/SOLDIERS/SOLDIERS.zip" beforeDir="false" afterPath="$PROJECT_DIR$/resources/SOLDIERS/SOLDIERS.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/SOUTH_AMERICA/argentina.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/SOUTH_AMERICA/argentina.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/SOUTH_AMERICA/brazil.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/SOUTH_AMERICA/brazil.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/SOUTH_AMERICA/peru.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/SOUTH_AMERICA/peru.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/SOUTH_AMERICA/venezuela.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/SOUTH_AMERICA/venezuela.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AssetLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AssetLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Territory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Territory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/State.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -73,27 +31,35 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/UserInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
-              <caret line="297" column="67" selection-start-line="297" selection-start-column="67" selection-end-line="297" selection-end-column="67" />
+            <state relative-caret-position="351">
+              <caret line="197" column="63" selection-start-line="197" selection-start-column="63" selection-end-line="197" selection-end-column="63" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#main#0;class#UserInterface#0" />
+                <element signature="method#loadAssets#0;class#UserInterface#0" />
+                <element signature="method#init#0;class#UserInterface#0" />
+                <element signature="class#7098:8801" />
+                <element signature="class#8838:9189" />
+                <element signature="class#SliderListener#0;class#UserInterface#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="67" selection-start-line="67" selection-end-line="67" />
+            <state relative-caret-position="366">
+              <caret line="105" column="56" selection-start-line="105" selection-start-column="56" selection-end-line="105" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2605#2606#0" expanded="true" />
-                <element signature="e#2635#2636#0" expanded="true" />
+                <element signature="e#6409#6410#0" expanded="true" />
+                <element signature="e#6484#6485#0" expanded="true" />
+                <element signature="e#5658#5659#0" expanded="true" />
+                <element signature="e#5685#5686#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -102,8 +68,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/State.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="23" selection-start-line="1" selection-start-column="23" selection-end-line="1" selection-end-column="23" />
+            <state relative-caret-position="30">
+              <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -111,8 +77,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AssetLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="516">
-              <caret line="66" column="77" selection-start-line="66" selection-start-column="77" selection-end-line="66" selection-end-column="77" />
+            <state relative-caret-position="146">
+              <caret line="99" column="26" selection-start-line="99" selection-start-column="22" selection-end-line="99" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -123,11 +89,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Territory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
+            <state relative-caret-position="434">
               <caret line="35" column="36" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#605#606#0" expanded="true" />
+                <element signature="e#608#609#0" expanded="true" />
                 <element signature="e#636#637#0" expanded="true" />
                 <element signature="e#832#833#0" expanded="true" />
               </folding>
@@ -155,10 +121,16 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="6" column="52" selection-start-line="6" selection-start-column="52" selection-end-line="6" selection-end-column="52" />
+            <state relative-caret-position="419">
+              <caret line="37" column="20" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#863#864#0" expanded="true" />
+                <element signature="e#895#896#0" expanded="true" />
+                <element signature="e#932#933#0" expanded="true" />
+                <element signature="e#957#958#0" expanded="true" />
+                <element signature="e#942#943#0" expanded="true" />
+                <element signature="e#984#985#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -208,6 +180,7 @@
       <find>slider</find>
       <find>loadImages</find>
       <find>g2</find>
+      <find>gets</find>
     </findStrings>
     <replaceStrings>
       <replace>gameScreen</replace>
@@ -226,13 +199,13 @@
         <option value="$PROJECT_DIR$/src/Card.java" />
         <option value="$PROJECT_DIR$/src/CardType.java" />
         <option value="$PROJECT_DIR$/src/Continent.java" />
-        <option value="$PROJECT_DIR$/src/Player.java" />
-        <option value="$PROJECT_DIR$/src/State.java" />
-        <option value="$PROJECT_DIR$/src/Game.java" />
         <option value="$PROJECT_DIR$/src/Colour.java" />
         <option value="$PROJECT_DIR$/src/AssetLoader.java" />
         <option value="$PROJECT_DIR$/src/Territory.java" />
+        <option value="$PROJECT_DIR$/src/State.java" />
+        <option value="$PROJECT_DIR$/src/Player.java" />
         <option value="$PROJECT_DIR$/src/UserInterface.java" />
+        <option value="$PROJECT_DIR$/src/Game.java" />
       </list>
     </option>
   </component>
@@ -252,7 +225,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -270,12 +242,13 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1592085501587" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1592148210167" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -334,18 +307,19 @@
       <workItem from="1591620474946" duration="13362000" />
       <workItem from="1591812533849" duration="4477000" />
       <workItem from="1592003891606" duration="10547000" />
-      <workItem from="1592041474086" duration="5832000" />
+      <workItem from="1592041474086" duration="6697000" />
+      <workItem from="1592141227055" duration="6613000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82984000" />
+    <option name="totallyTimeSpent" value="90462000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="-1" width="1920" height="1080" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.291889" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2950907" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -354,7 +328,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3294979" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.73849374" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4623431" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39958158" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -420,16 +394,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="6" column="52" selection-start-line="6" selection-start-column="52" selection-end-line="6" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Card.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -451,54 +415,78 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="67" selection-start-line="67" selection-end-line="67" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2605#2606#0" expanded="true" />
-            <element signature="e#2635#2636#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/State.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="23" selection-start-line="1" selection-start-column="23" selection-end-line="1" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AssetLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="516">
-          <caret line="66" column="77" selection-start-line="66" selection-start-column="77" selection-end-line="66" selection-end-column="77" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Territory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
+        <state relative-caret-position="434">
           <caret line="35" column="36" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#605#606#0" expanded="true" />
+            <element signature="e#608#609#0" expanded="true" />
             <element signature="e#636#637#0" expanded="true" />
             <element signature="e#832#833#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/UserInterface.java">
+    <entry file="file://$PROJECT_DIR$/src/State.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="297" column="67" selection-start-line="297" selection-start-column="67" selection-end-line="297" selection-end-column="67" />
+        <state relative-caret-position="30">
+          <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="419">
+          <caret line="37" column="20" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#863#864#0" expanded="true" />
+            <element signature="e#895#896#0" expanded="true" />
+            <element signature="e#932#933#0" expanded="true" />
+            <element signature="e#957#958#0" expanded="true" />
+            <element signature="e#942#943#0" expanded="true" />
+            <element signature="e#984#985#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AssetLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="99" column="26" selection-start-line="99" selection-start-column="22" selection-end-line="99" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UserInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="197" column="63" selection-start-line="197" selection-start-column="63" selection-end-line="197" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#main#0;class#UserInterface#0" />
+            <element signature="method#loadAssets#0;class#UserInterface#0" />
+            <element signature="method#init#0;class#UserInterface#0" />
+            <element signature="class#7098:8801" />
+            <element signature="class#8838:9189" />
+            <element signature="class#SliderListener#0;class#UserInterface#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="366">
+          <caret line="105" column="56" selection-start-line="105" selection-start-column="56" selection-end-line="105" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6409#6410#0" expanded="true" />
+            <element signature="e#6484#6485#0" expanded="true" />
+            <element signature="e#5658#5659#0" expanded="true" />
+            <element signature="e#5685#5686#0" expanded="true" />
           </folding>
         </state>
       </provider>

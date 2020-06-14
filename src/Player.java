@@ -5,9 +5,11 @@ public class Player {
     private LinkedHashMap<String, Territory> territories = new LinkedHashMap<>();
     private Colour colour;
     private ArrayList<Card> cards = new ArrayList<>();
+    private int numTroops;
 
     public Player(Colour colour) {
         this.colour = colour;
+        this.numTroops = 30;
     }
 
     public LinkedHashMap<String, Territory> getTerritories() {
@@ -26,5 +28,17 @@ public class Player {
         System.out.println("Territory Name: " + territory.getName());
         territories.put(territory.getName(), territory);
         System.out.println("Gets here!");
+    }
+
+    public int getNumTroops() {
+        return numTroops;
+    }
+
+    public void decrementTroops() {
+        numTroops--;
+    }
+
+    public void setNumTroops(int numTroops) {
+        this.numTroops = numTroops;
     }
 }

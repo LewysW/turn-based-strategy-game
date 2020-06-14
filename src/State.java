@@ -1,3 +1,4 @@
 public enum State {
-    TERRITORY_SELECTION
+    TERRITORY_SELECTION,
+    TROOP_DEPLOYMENT
 }
