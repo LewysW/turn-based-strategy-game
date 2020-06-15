@@ -1,6 +1,7 @@
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.Random;
 
 public class Game {
@@ -75,7 +76,7 @@ public class Game {
                     return true;
                 }
             //If players are deploying their initial troops
-            } else if (state == State.TROOP_DEPLOYMENT) {
+            } else if (state == State.TROOP_DEPLOYMENT || state == State.REINFORCEMENTS) {
                 //If the current player owns the territory clicked
                 if (owner(territory) == players.get(turn)) {
                     //If they have troops to deploy
@@ -88,17 +89,60 @@ public class Game {
                         players.get(turn).decrementTroops();
 
                         //Sets turn to next player
-                        updateTurn();
+                        if (state == State.TROOP_DEPLOYMENT) {
+                            updateTurn();
+                            System.out.println(players.get(turn).getColour() + " Player's Turn!");
 
-                        System.out.println(players.get(turn).getColour() + " Player's Turn!");
+
+                            if (troopsDeployed()) {
+                                //Move to reinforcement phase
+                                state = State.REINFORCEMENTS;
+                                //calculate number of troops for player
+                                players.get(turn).setNumTroops(calculateTroops(players.get(turn).getTerritories()));
+                            }
+                        }
 
                         return true;
+                    } else if (state == State.REINFORCEMENTS) {
+                        state = State.ATTACK_PHASE;
                     }
                 }
             }
         }
 
         return false;
+    }
+
+    private int calculateTroops(LinkedHashMap<String, Territory> territories) {
+        //Calculate number of troops based on number of territories
+        int troops = (territories.size() < 9) ? 3 : Math.floorDiv(territories.size(), 3);
+
+        //Add bonuses provided by controlled continents
+        for (Continent continent : continents) {
+            boolean bonus = true;
+            for (Territory territory : continent.getTerritories()) {
+                if (!territories.containsKey(territory.getName())) {
+                    bonus = false;
+                    break;
+                }
+            }
+
+            if (bonus) {
+                troops += continent.getBonus();
+            }
+        }
+
+        return troops;
+    }
+
+    private boolean troopsDeployed() {
+        for (Player player : players) {
+            if (player.getNumTroops() > 0) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

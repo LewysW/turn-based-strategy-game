@@ -196,12 +196,16 @@ public class UserInterface extends JPanel {
             @Override //I override only one method for presentation
             public void mousePressed(MouseEvent e) {
                 System.out.println(e.getX() + ", " + e.getY());
-                if (game.getState() == State.TERRITORY_SELECTION || game.getState() == State.TROOP_DEPLOYMENT) {
-                    boolean deployed = game.deployUnit(new Point2D.Double(e.getX(), e.getY()));
 
-                    if (deployed) {
-                        repaint();
-                    }
+                switch (game.getState()) {
+                    case TERRITORY_SELECTION:
+                    case TROOP_DEPLOYMENT:
+                    case REINFORCEMENTS:
+                        boolean deployed = game.deployUnit(new Point2D.Double(e.getX(), e.getY()));
+
+                        if (deployed) {
+                            repaint();
+                        }
                 }
             }
         });
@@ -263,6 +267,7 @@ public class UserInterface extends JPanel {
 
     }
 
+    //TODO - break down to smaller functions
     /**
      * Repaints the display
      * @param g - graphics object used to paint display
@@ -277,6 +282,28 @@ public class UserInterface extends JPanel {
             //Fill background of display
             graphics2D.setColor(new Color(30, 140, 168));
             graphics2D.fillRect(0, 0, 1920, 1080);
+
+            graphics2D.setColor(Color.DARK_GRAY);
+            graphics2D.fillOval(0, 0, 53, 106);
+
+            graphics2D.setColor(Color.lightGray);
+            graphics2D.fillOval(3, 3, 47, 100);
+
+            //Display current player
+            BufferedImage currentPlayer = soldiers.get(game.getPlayers().get(game.getTurn()).getColour());
+            graphics2D.drawImage(currentPlayer, 17, 10, currentPlayer.getWidth() / 4, currentPlayer.getHeight() / 4, null);
+
+            if (game.getState() == State.TROOP_DEPLOYMENT || game.getState() == State.REINFORCEMENTS) {
+                //Draw number of units remaining for current player
+                graphics2D.setColor(Color.WHITE);
+                graphics2D.setFont(new Font("TimesRoman", Font.BOLD, 12));
+
+                int numUnits = game.getPlayers().get(game.getTurn()).getNumTroops();
+                int x = (numUnits < 10) ? 22 : 18;
+
+                graphics2D.drawString(Integer.toString(numUnits), x, 60);
+            }
+
             //Draws the image for each territory
             for (Continent continent : continents) {
                 for (Territory territory : continent.getTerritories()) {
