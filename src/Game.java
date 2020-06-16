@@ -11,6 +11,7 @@ public class Game {
     private boolean autoSelection;
     private int turn;
     private State state;
+    private AttackPhase attackPhase = new AttackPhase();
 
     public Game(ArrayList<Continent> continents, int numPlayers, String gameMode, String territorySelection) {
         this.continents = continents;
@@ -50,6 +51,53 @@ public class Game {
         }
     }
 
+    public void attack(Point2D coordinate) {
+        Territory territory = clickedTerritory(coordinate);
+
+        //If coordinate lies within a territory
+        if (territory != null) {
+            //Get the owner of that territory
+            Player owner = owner(territory);
+
+            //Switch based on stage of attack phase
+            switch (attackPhase.getStage()) {
+                //If no countries have been selected
+                case NONE_SELECTED:
+                    //If the selected country is owned by the current player and has more than 1 unit in it
+                    if (owner == players.get(turn) && territory.getNumUnits() > 1) {
+                        //Mark this territory as the attacking territory and move to next stage of attack
+                        attackPhase.setStage(AttackStage.ATTACKER_SELECTED);
+                        attackPhase.setAttacking(territory);
+                        System.out.println("Attacking from " + territory.getName());
+                    }
+                    break;
+                //If the attacking territory has been selected
+                case ATTACKER_SELECTED:
+                    //If the attacking territory is clicked again
+                    if (territory == attackPhase.getAttacking()) {
+                        //Deselect it by moving back to previous stage
+                        attackPhase.setStage(AttackStage.NONE_SELECTED);
+                    //Otherwise if an enemy territory has been selected
+                    } else if (owner != players.get(turn)) {
+                        //Move to next stage
+                        attackPhase.setStage(AttackStage.DEFENDER_SELECTED);
+                        //Set defender to enemy territory
+                        attackPhase.setDefending(territory);
+                        System.out.println(territory.getName() + " is defending");
+                    }
+                    break;
+                case DEFENDER_SELECTED:
+                    //If defending territory was clicked again
+                    if (territory == attackPhase.getDefending()) {
+                        //Move to previous stage (effectively deselecting defender)
+                        attackPhase.setStage(AttackStage.ATTACKER_SELECTED);
+                    }
+                    break;
+            }
+        }
+    }
+
+    //TODO - break down to smaller functions
     public boolean deployUnit(Point2D coordinate) {
         Territory territory = clickedTerritory(coordinate);
 
@@ -99,6 +147,11 @@ public class Game {
                                 state = State.REINFORCEMENTS;
                                 //calculate number of troops for player
                                 players.get(turn).setNumTroops(calculateTroops(players.get(turn).getTerritories()));
+                            }
+                        //If reinforcements deployed then switch to attack phase
+                        } else if (state == State.REINFORCEMENTS) {
+                            if (troopsDeployed()) {
+                                state = State.ATTACK_PHASE;
                             }
                         }
 
@@ -243,5 +296,9 @@ public class Game {
 
     public int getTurn() {
         return turn;
+    }
+
+    public AttackPhase getAttackPhase() {
+        return attackPhase;
     }
 }

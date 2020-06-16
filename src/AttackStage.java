@@ -1,0 +1,6 @@
+public enum AttackStage {
+    NONE_SELECTED,
+    ATTACKER_SELECTED,
+    DEFENDER_SELECTED,
+    ATTACKING
+}

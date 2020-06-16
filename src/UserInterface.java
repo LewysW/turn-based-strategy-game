@@ -197,6 +197,7 @@ public class UserInterface extends JPanel {
             public void mousePressed(MouseEvent e) {
                 System.out.println(e.getX() + ", " + e.getY());
 
+
                 switch (game.getState()) {
                     case TERRITORY_SELECTION:
                     case TROOP_DEPLOYMENT:
@@ -206,6 +207,10 @@ public class UserInterface extends JPanel {
                         if (deployed) {
                             repaint();
                         }
+                        break;
+                    case ATTACK_PHASE:
+                        game.attack(new Point2D.Double(e.getX(), e.getY()));
+                        repaint();
                 }
             }
         });
@@ -293,15 +298,18 @@ public class UserInterface extends JPanel {
             BufferedImage currentPlayer = soldiers.get(game.getPlayers().get(game.getTurn()).getColour());
             graphics2D.drawImage(currentPlayer, 17, 10, currentPlayer.getWidth() / 4, currentPlayer.getHeight() / 4, null);
 
-            if (game.getState() == State.TROOP_DEPLOYMENT || game.getState() == State.REINFORCEMENTS) {
-                //Draw number of units remaining for current player
-                graphics2D.setColor(Color.WHITE);
-                graphics2D.setFont(new Font("TimesRoman", Font.BOLD, 12));
+            //Draw troop icon in top left of
+            switch (game.getState()) {
+                case TROOP_DEPLOYMENT:
+                case REINFORCEMENTS:
+                    //Draw number of units remaining for current player
+                    graphics2D.setColor(Color.WHITE);
+                    graphics2D.setFont(new Font("TimesRoman", Font.BOLD, 12));
 
-                int numUnits = game.getPlayers().get(game.getTurn()).getNumTroops();
-                int x = (numUnits < 10) ? 22 : 18;
+                    int numUnits = game.getPlayers().get(game.getTurn()).getNumTroops();
+                    int x = (numUnits < 10) ? 22 : 18;
 
-                graphics2D.drawString(Integer.toString(numUnits), x, 60);
+                    graphics2D.drawString(Integer.toString(numUnits), x, 60);
             }
 
             //Draws the image for each territory
@@ -331,6 +339,22 @@ public class UserInterface extends JPanel {
                     double textY = y + 50;
 
                     graphics2D.drawString(Integer.toString(territory.getNumUnits()), (int) textX, (int) textY);
+                }
+            }
+
+            //Draw outline of attacking and defending countries if selected during attack phase
+            if (game.getState() == State.ATTACK_PHASE) {
+                graphics2D.setStroke(new BasicStroke(5));
+
+                switch (game.getAttackPhase().getStage()) {
+                    case DEFENDER_SELECTED:
+                        System.out.println("Drawing defending border!");
+                        graphics2D.setColor(Color.RED);
+                        graphics2D.draw(game.getAttackPhase().getDefending().getBorder());
+                    case ATTACKER_SELECTED:
+                        graphics2D.setColor(Color.BLUE);
+                        graphics2D.draw(game.getAttackPhase().getAttacking().getBorder());
+                        break;
                 }
             }
         }
