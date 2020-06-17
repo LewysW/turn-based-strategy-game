@@ -95,6 +95,10 @@ public class Game {
                     break;
             }
         }
+        //TODO - handle dice click and update state
+        //else if (diceClicked()) {
+
+        //}
     }
 
     //TODO - break down to smaller functions

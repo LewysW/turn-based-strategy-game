@@ -302,4 +302,54 @@ public class AssetLoader {
 
         return soldiers;
     }
+
+    public LinkedHashMap<Colour, ArrayList<BufferedImage>> loadDice() {
+        LinkedHashMap<Colour, ArrayList<BufferedImage>> dice = new LinkedHashMap<>();
+        dice.put(Colour.RED, new ArrayList<>());
+        dice.put(Colour.WHITE, new ArrayList<>());
+
+        //Initialise indices of dice arrays
+        for (Colour colour : dice.keySet()) {
+            for (int i = 0; i < 6; i++) {
+                dice.get(colour).add(null);
+            }
+        }
+
+        try {
+            String dir = "resources/DICE/";
+            unzip(dir + "DICE.zip", dir);
+
+            //Crawls files
+            List<File> filesInFolder = Files.walk(Paths.get("resources/DICE"))
+                    .filter(Files::isRegularFile)
+                    .map(Path::toFile)
+                    .collect(Collectors.toList());
+
+            //For each dice icon file
+            for (File file : filesInFolder) {
+                //Check it is a valid png image
+                if (file.toString().endsWith(".png")) {
+                    int indexOfExt = file.toString().indexOf(".");
+                    int indexOfUnderScore = file.toString().indexOf("_");
+                    int indexOfSlash = file.toString().lastIndexOf("/");
+
+                    //Get colour and number
+                    String colourStr = file.toString().substring(indexOfSlash + 1, indexOfUnderScore);
+                    int num = Integer.parseInt(file.toString().substring(indexOfUnderScore + 1, indexOfExt));
+
+
+                    for (Colour colour : Colour.values()) {
+                        if (colourStr.equals(colour.name())) {
+                            dice.get(colour).set(num - 1, ImageIO.read(file));
+                            file.delete();
+                        }
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return dice;
+    }
 }

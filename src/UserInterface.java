@@ -61,6 +61,7 @@ public class UserInterface extends JPanel {
     private static ArrayList<Continent> continents = new ArrayList<>();
     private static BufferedImage background;
     private static LinkedHashMap<Colour, BufferedImage> soldiers;
+    private static LinkedHashMap<Colour, ArrayList<BufferedImage>> dice;
 
     private static Music music;
 
@@ -73,6 +74,7 @@ public class UserInterface extends JPanel {
         continents = assetLoader.loadContinents();
         background = assetLoader.loadMenuArt();
         soldiers = assetLoader.loadSoldiers();
+        dice = assetLoader.loadDice();
     }
 
 

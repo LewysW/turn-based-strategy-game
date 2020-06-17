@@ -2,5 +2,6 @@ public enum AttackStage {
     NONE_SELECTED,
     ATTACKER_SELECTED,
     DEFENDER_SELECTED,
-    ATTACKING
+    TWO_DICE,
+    THREE_DICE
 }
