@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="044007da-0a2d-4dbe-b825-8131c3fae1fb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/AssetLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AssetLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AttackStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AttackStage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Colour.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Colour.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -31,11 +27,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/UserInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="711">
-              <caret line="76" column="38" selection-start-line="76" selection-start-column="38" selection-end-line="76" selection-end-column="38" />
+            <state relative-caret-position="198">
+              <caret line="380" column="25" selection-start-line="380" selection-start-column="25" selection-end-line="380" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#main#0;class#UserInterface#0" />
@@ -46,11 +42,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AssetLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="356" column="37" selection-start-line="356" selection-start-column="37" selection-end-line="356" selection-end-column="37" />
+            <state relative-caret-position="651">
+              <caret line="333" column="70" selection-start-line="333" selection-start-column="70" selection-end-line="333" selection-end-column="70" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -76,7 +72,7 @@
         <entry file="file://$PROJECT_DIR$/src/Game.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="786">
-              <caret line="97" column="38" lean-forward="true" selection-start-line="97" selection-start-column="38" selection-end-line="97" selection-end-column="38" />
+              <caret line="97" column="38" selection-start-line="97" selection-start-column="38" selection-end-line="97" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#10728#10729#0" expanded="true" />
@@ -209,9 +205,9 @@
         <option value="$PROJECT_DIR$/src/AttackPhase.java" />
         <option value="$PROJECT_DIR$/src/AttackStage.java" />
         <option value="$PROJECT_DIR$/src/Game.java" />
-        <option value="$PROJECT_DIR$/src/UserInterface.java" />
         <option value="$PROJECT_DIR$/src/Colour.java" />
         <option value="$PROJECT_DIR$/src/AssetLoader.java" />
+        <option value="$PROJECT_DIR$/src/UserInterface.java" />
       </list>
     </option>
   </component>
@@ -319,12 +315,12 @@
       <workItem from="1592230524507" duration="7031000" />
       <workItem from="1592324026637" duration="6449000" />
       <workItem from="1592343969632" duration="493000" />
-      <workItem from="1592397702193" duration="3474000" />
+      <workItem from="1592397702193" duration="6326000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="108850000" />
+    <option name="totallyTimeSpent" value="111702000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="-1" width="1920" height="1080" extended-state="6" />
@@ -475,7 +471,7 @@
     <entry file="file://$PROJECT_DIR$/src/Game.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="786">
-          <caret line="97" column="38" lean-forward="true" selection-start-line="97" selection-start-column="38" selection-end-line="97" selection-end-column="38" />
+          <caret line="97" column="38" selection-start-line="97" selection-start-column="38" selection-end-line="97" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#10728#10729#0" expanded="true" />
@@ -490,19 +486,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/UserInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="711">
-          <caret line="76" column="38" selection-start-line="76" selection-start-column="38" selection-end-line="76" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#main#0;class#UserInterface#0" />
-            <element signature="method#init#0;class#UserInterface#0" />
-            <element signature="class#SliderListener#0;class#UserInterface#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Colour.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -512,10 +495,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AssetLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="356" column="37" selection-start-line="356" selection-start-column="37" selection-end-line="356" selection-end-column="37" />
+        <state relative-caret-position="651">
+          <caret line="333" column="70" selection-start-line="333" selection-start-column="70" selection-end-line="333" selection-end-column="70" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UserInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="380" column="25" selection-start-line="380" selection-start-column="25" selection-end-line="380" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#main#0;class#UserInterface#0" />
+            <element signature="method#init#0;class#UserInterface#0" />
+            <element signature="class#SliderListener#0;class#UserInterface#0" />
           </folding>
         </state>
       </provider>

@@ -344,6 +344,17 @@ public class UserInterface extends JPanel {
                 }
             }
 
+            graphics2D.setColor(new Color(164, 96, 28));
+            graphics2D.fillRect( 25, 500, 300, 225);
+
+            drawDottedSquare(g, 130, 510, 80, 80, Color.RED);
+            drawDottedSquare(g, 230, 510, 80, 80, Color.RED);
+
+            drawDottedSquare(g, 130, 620, 80, 80, Color.WHITE);
+
+            graphics2D.drawImage(dice.get(Colour.RED).get(0), 30, 510, null);
+            graphics2D.drawImage(dice.get(Colour.WHITE).get(0), 30, 620 , null);
+
             //Draw outline of attacking and defending countries if selected during attack phase
             if (game.getState() == State.ATTACK_PHASE) {
                 graphics2D.setStroke(new BasicStroke(5));
@@ -361,6 +372,22 @@ public class UserInterface extends JPanel {
             }
         }
 
+    }
+
+    public void drawDottedSquare(Graphics g, int x, int y, int w, int h, Color c) {
+        //creates a copy of the Graphics instance
+        Graphics2D g2d = (Graphics2D) g.create();
+
+        //Sets the colour
+        g2d.setColor(c);
+
+        //set the stroke of the copy, not the original
+        Stroke dashed = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 0);
+        g2d.setStroke(dashed);
+        g2d.drawRect(x, y, w, h);
+
+        //gets rid of the copy
+        g2d.dispose();
     }
 
     /**
