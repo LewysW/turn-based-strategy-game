@@ -1,6 +1,6 @@
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Random;
 
@@ -12,6 +12,7 @@ public class Game {
     private int turn;
     private State state;
     private AttackPhase attackPhase = new AttackPhase();
+    private static final Point2D[] redDiceCoords = {new Point2D.Double(125, 510), new Point2D.Double(225, 510)};
 
     public Game(ArrayList<Continent> continents, int numPlayers, String gameMode, String territorySelection) {
         this.continents = continents;
@@ -53,6 +54,8 @@ public class Game {
 
     public void attack(Point2D coordinate) {
         Territory territory = clickedTerritory(coordinate);
+        Rectangle2D secondDice = new Rectangle2D.Double(redDiceCoords[0].getX(), redDiceCoords[0].getY(), 100, 101);
+        Rectangle2D thirdDice = new Rectangle2D.Double(redDiceCoords[1].getX(), redDiceCoords[1].getY(), 100, 101);
 
         //If coordinate lies within a territory
         if (territory != null) {
@@ -87,18 +90,63 @@ public class Game {
                     }
                     break;
                 case DEFENDER_SELECTED:
+                case TWO_DICE:
+                case THREE_DICE:
                     //If defending territory was clicked again
                     if (territory == attackPhase.getDefending()) {
                         //Move to previous stage (effectively deselecting defender)
                         attackPhase.setStage(AttackStage.ATTACKER_SELECTED);
+                        //Set number of dice in each case to 1
+                        attackPhase.setRedDice(1);
+                        attackPhase.setWhiteDice(1);
                     }
                     break;
             }
-        }
-        //TODO - handle dice click and update state
-        //else if (diceClicked()) {
+        //Otherwise if second dice clicked
+        } else if (diceClicked(coordinate, secondDice)) {
+            switch (attackPhase.getStage()) {
+                //Add new dice if only first dice in use
+                case DEFENDER_SELECTED:
+                    if (attackPhase.getAttacking().getNumUnits() > 2) {
+                        attackPhase.setStage(AttackStage.TWO_DICE);
 
-        //}
+                        attackPhase.incrementRed();
+
+                        if (attackPhase.getDefending().getNumUnits() > 1) {
+                            attackPhase.incrementWhite();
+                        }
+                    }
+                    break;
+                //Get rid of second dice if both in use
+                case TWO_DICE:
+                    attackPhase.setStage(AttackStage.DEFENDER_SELECTED);
+                    attackPhase.decrementRed();
+
+                    if (attackPhase.getWhiteDice() == 2) {
+                        attackPhase.decrementWhite();
+                    }
+                    break;
+            }
+        //Otherwise if third dice clicked
+        } else if (diceClicked(coordinate, thirdDice)) {
+            switch (attackPhase.getStage()) {
+                //Add new dice if only two in use
+                case TWO_DICE:
+                    if (attackPhase.getAttacking().getNumUnits() > 3) {
+                        attackPhase.setStage(AttackStage.THREE_DICE);
+                        attackPhase.incrementRed();
+                    }
+                    break;
+                case THREE_DICE:
+                    attackPhase.setStage(AttackStage.TWO_DICE);
+                    attackPhase.decrementRed();
+                    break;
+            }
+        }
+    }
+
+    public boolean diceClicked(Point2D coordinate, Rectangle2D dice) {
+        return dice.contains(coordinate.getX(), coordinate.getY());
     }
 
     //TODO - break down to smaller functions

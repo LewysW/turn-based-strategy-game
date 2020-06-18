@@ -67,6 +67,10 @@ public class UserInterface extends JPanel {
 
     private static final String song = "resources/MUSIC/Die Walküre, WWV 86B - Fantasie.wav";
 
+    private static final Point2D[] redDiceCoords = {new Point2D.Double(25, 510),
+            new Point2D.Double(125, 510), new Point2D.Double(225, 510)};
+    private static final Point2D[] whiteDiceCoords = {new Point2D.Double(70, 620), new Point2D.Double(170, 620)};
+
     private static void loadAssets() {
         //Loads in images and borders
         AssetLoader assetLoader = new AssetLoader();
@@ -286,6 +290,7 @@ public class UserInterface extends JPanel {
         if (menu) {
             graphics2D.drawImage(background, 0, 0, null);
         } else {
+            //TODO - move to function
             //Fill background of display
             graphics2D.setColor(new Color(30, 140, 168));
             graphics2D.fillRect(0, 0, 1920, 1080);
@@ -300,6 +305,7 @@ public class UserInterface extends JPanel {
             BufferedImage currentPlayer = soldiers.get(game.getPlayers().get(game.getTurn()).getColour());
             graphics2D.drawImage(currentPlayer, 17, 10, currentPlayer.getWidth() / 4, currentPlayer.getHeight() / 4, null);
 
+            //TODO - move to function
             //Draw troop icon in top left of
             switch (game.getState()) {
                 case TROOP_DEPLOYMENT:
@@ -344,26 +350,43 @@ public class UserInterface extends JPanel {
                 }
             }
 
-            graphics2D.setColor(new Color(164, 96, 28));
-            graphics2D.fillRect( 25, 500, 300, 225);
-
-            drawDottedSquare(g, 130, 510, 80, 80, Color.RED);
-            drawDottedSquare(g, 230, 510, 80, 80, Color.RED);
-
-            drawDottedSquare(g, 130, 620, 80, 80, Color.WHITE);
-
-            graphics2D.drawImage(dice.get(Colour.RED).get(0), 30, 510, null);
-            graphics2D.drawImage(dice.get(Colour.WHITE).get(0), 30, 620 , null);
-
+            //TODO - move to function
             //Draw outline of attacking and defending countries if selected during attack phase
             if (game.getState() == State.ATTACK_PHASE) {
                 graphics2D.setStroke(new BasicStroke(5));
+                AttackStage stage = game.getAttackPhase().getStage();
 
-                switch (game.getAttackPhase().getStage()) {
+
+                switch (stage) {
                     case DEFENDER_SELECTED:
+                    case TWO_DICE:
+                    case THREE_DICE:
                         System.out.println("Drawing defending border!");
                         graphics2D.setColor(Color.RED);
                         graphics2D.draw(game.getAttackPhase().getDefending().getBorder());
+
+                        //Draw board with one dice
+                        drawBoard(g, graphics2D);
+                        //Draw first red dice
+                        graphics2D.drawImage(dice.get(Colour.RED).get(0), (int) redDiceCoords[0].getX(), (int) redDiceCoords[0].getY(), null);
+                        //Draw first white dice
+                        graphics2D.drawImage(dice.get(Colour.WHITE).get(0), (int) whiteDiceCoords[0].getX(), (int) whiteDiceCoords[0].getY() , null);
+
+                        //If two dice or three dice selected
+                        if (stage.equals(AttackStage.TWO_DICE) || stage.equals(AttackStage.THREE_DICE)) {
+                            //Draw second red dice
+                            graphics2D.drawImage(dice.get(Colour.RED).get(1), (int) redDiceCoords[1].getX(), (int) redDiceCoords[1].getY(), null);
+
+                            //If three dice selected
+                            if (stage.equals(AttackStage.THREE_DICE)) {
+                                graphics2D.drawImage(dice.get(Colour.RED).get(2), (int) redDiceCoords[2].getX(), (int) redDiceCoords[2].getY(), null);
+                            }
+
+                            //Draw second white dice
+                            if (game.getAttackPhase().getWhiteDice() == 2) {
+                                graphics2D.drawImage(dice.get(Colour.WHITE).get(1), (int) whiteDiceCoords[1].getX(), (int) whiteDiceCoords[1].getY(), null);
+                            }
+                        }
                     case ATTACKER_SELECTED:
                         graphics2D.setColor(Color.BLUE);
                         graphics2D.draw(game.getAttackPhase().getAttacking().getBorder());
@@ -372,6 +395,26 @@ public class UserInterface extends JPanel {
             }
         }
 
+    }
+
+    public void drawBoard(Graphics g, Graphics2D graphics2D) {
+        graphics2D.setColor(new Color(164, 96, 28));
+        graphics2D.fillRect( 25, 500, 300, 225);
+        int redDice = game.getAttackPhase().getRedDice();
+        int whiteDice = game.getAttackPhase().getWhiteDice();
+
+
+        if (redDice < 2) {
+            drawDottedSquare(g, 135, 520, 80, 80, Color.RED);
+        }
+
+        if (redDice < 3) {
+            drawDottedSquare(g, 230, 520, 80, 80, Color.RED);
+        }
+
+        if (whiteDice < 2) {
+            drawDottedSquare(g, 175, 630, 80, 80, Color.WHITE);
+        }
     }
 
     public void drawDottedSquare(Graphics g, int x, int y, int w, int h, Color c) {
