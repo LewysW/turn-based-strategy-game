@@ -1,6 +1,7 @@
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Random;
 
@@ -150,18 +151,63 @@ public class Game {
                 case DEFENDER_SELECTED:
                 case TWO_DICE:
                 case THREE_DICE:
-                    //TODO - implement attack logic
+                    Player attacker = owner(attackPhase.getAttacking());
+                    Player defender = owner(attackPhase.getDefending());
+                    ArrayList<Integer> attackingDice = new ArrayList<>();
+                    ArrayList<Integer> defendingDice = new ArrayList<>();
+
+                    Random rand = new Random();
+
+                    //Roll attacking dice
+                     while (attackingDice.size() < attackPhase.getRedDice()) {
+                         attackingDice.add(rand.nextInt(6) + 1);
+                     }
+
+                     //Roll defending dice
+                     while (defendingDice.size() < attackPhase.getWhiteDice()) {
+                         defendingDice.add(rand.nextInt(6) + 1);
+                     }
+
+                     //Sort dice in ascending order
+                    Collections.sort(attackingDice);
+                    Collections.sort(defendingDice);
+
+                    int a = attackingDice.size() - 1;
+                    int d = defendingDice.size() - 1;
+
+                    Territory attacking = attackPhase.getAttacking();
+                    Territory defending = attackPhase.getDefending();
+
+                    //Remove soldier from losing territory
+                    while (d >= 0) {
+                        //If attacker wins, remove one soldier from defending territory
+                        if (attackingDice.get(a) > defendingDice.get(d)) {
+                            defender.getTerritories().get(defending.getName()).decrementUnits();
+                        //If defender wins, remove one soldier from attacking territory
+                        } else {
+                            attacker.getTerritories().get(attacking.getName()).decrementUnits();
+                        }
+
+                        a--;
+                        d--;
+
+                        //TODO - create dice objects within game object
+                        //TODO - use dice object values to update dice pictures on board
+                        //TODO - update state after attack
+                    }
+
+                    System.out.println("Attacking dice: " + attackingDice);
+                    System.out.println("Defending dice: " + defendingDice);
                     //TODO - implement dice rolling animation
-                    //TODO - make dice objects and add roll function
             }
         }
     }
 
-    public boolean attackButtonClicked(Point2D coordinate) {
+    private boolean attackButtonClicked(Point2D coordinate) {
         return attackButton.contains(coordinate.getX(), coordinate.getY());
     }
 
-    public boolean diceClicked(Point2D coordinate, Rectangle2D dice) {
+    private boolean diceClicked(Point2D coordinate, Rectangle2D dice) {
         return dice.contains(coordinate.getX(), coordinate.getY());
     }
 
