@@ -62,6 +62,7 @@ public class UserInterface extends JPanel {
     private static BufferedImage background;
     private static LinkedHashMap<Colour, BufferedImage> soldiers;
     private static LinkedHashMap<Colour, ArrayList<BufferedImage>> dice;
+    private static BufferedImage swords;
 
     private static Music music;
 
@@ -79,6 +80,7 @@ public class UserInterface extends JPanel {
         background = assetLoader.loadMenuArt();
         soldiers = assetLoader.loadSoldiers();
         dice = assetLoader.loadDice();
+        swords = assetLoader.loadAttackingImages();
     }
 
 
@@ -415,6 +417,15 @@ public class UserInterface extends JPanel {
         if (whiteDice < 2) {
             drawDottedSquare(g, 175, 630, 80, 80, Color.WHITE);
         }
+
+        //TODO - move board code into class
+        graphics2D.setColor(Color.gray);
+        graphics2D.fillRect(123, 738, 95, 95);
+        graphics2D.setColor(new Color(143, 26, 13));
+        graphics2D.fillRect(125, 740, 90, 90);
+        graphics2D.drawImage(swords, 125, 745, swords.getWidth() / 15, swords.getHeight() / 15, null);
+        graphics2D.setColor(new Color(252, 219, 28));
+        graphics2D.drawString("ATTACK!", 140, 750);
     }
 
     public void drawDottedSquare(Graphics g, int x, int y, int w, int h, Color c) {

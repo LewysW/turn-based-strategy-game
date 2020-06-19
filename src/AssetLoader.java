@@ -262,6 +262,20 @@ public class AssetLoader {
         return null;
     }
 
+    public BufferedImage loadAttackingImages() {
+        try {
+            unzip("resources/ATTACK/ATTACK.zip", "resources/ATTACK/");
+            File file = new File("resources/ATTACK/swords.png");
+            BufferedImage img = ImageIO.read(file);
+            file.delete();
+            return img;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     /**
      * Loads icons for each colour player
      * @return - a map of colours to soldier images corresponding to those colours
@@ -303,6 +317,10 @@ public class AssetLoader {
         return soldiers;
     }
 
+    /**
+     * Loads the images of the attacking and defending dice
+     * @return the dice images
+     */
     public LinkedHashMap<Colour, ArrayList<BufferedImage>> loadDice() {
         LinkedHashMap<Colour, ArrayList<BufferedImage>> dice = new LinkedHashMap<>();
         dice.put(Colour.RED, new ArrayList<>());

@@ -12,7 +12,8 @@ public class Game {
     private int turn;
     private State state;
     private AttackPhase attackPhase = new AttackPhase();
-    private static final Point2D[] redDiceCoords = {new Point2D.Double(125, 510), new Point2D.Double(225, 510)};
+    private final Point2D[] redDiceCoords = {new Point2D.Double(125, 510), new Point2D.Double(225, 510)};
+    private Rectangle2D attackButton = new Rectangle2D.Double(123, 738, 95, 95);
 
     public Game(ArrayList<Continent> continents, int numPlayers, String gameMode, String territorySelection) {
         this.continents = continents;
@@ -52,6 +53,7 @@ public class Game {
         }
     }
 
+    //TODO split into different functions
     public void attack(Point2D coordinate) {
         Territory territory = clickedTerritory(coordinate);
         Rectangle2D secondDice = new Rectangle2D.Double(redDiceCoords[0].getX(), redDiceCoords[0].getY(), 100, 101);
@@ -142,7 +144,21 @@ public class Game {
                     attackPhase.decrementRed();
                     break;
             }
+        //If attack button clicked when dice selected
+        } else if (attackButtonClicked(coordinate)) {
+            switch (attackPhase.getStage()) {
+                case DEFENDER_SELECTED:
+                case TWO_DICE:
+                case THREE_DICE:
+                    //TODO - implement attack logic
+                    //TODO - implement dice rolling animation
+                    //TODO - make dice objects and add roll function
+            }
         }
+    }
+
+    public boolean attackButtonClicked(Point2D coordinate) {
+        return attackButton.contains(coordinate.getX(), coordinate.getY());
     }
 
     public boolean diceClicked(Point2D coordinate, Rectangle2D dice) {
