@@ -33,6 +33,10 @@ public class Territory {
         return numUnits;
     }
 
+    public void setNumUnits(int numUnits) {
+        this.numUnits = numUnits;
+    }
+
     public Point2D getTroopCoord() {
         return troopCoord;
     }

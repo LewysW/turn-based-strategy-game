@@ -41,4 +41,11 @@ public class Player {
     public void setNumTroops(int numTroops) {
         this.numTroops = numTroops;
     }
+
+    public void inflictCasualties(Territory territory, int numCasualties) {
+        while (numCasualties > 0) {
+            territories.get(territory.getName()).decrementUnits();
+            numCasualties--;
+        }
+    }
 }

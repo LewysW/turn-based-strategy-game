@@ -15,6 +15,8 @@ public class Game {
     private AttackPhase attackPhase = new AttackPhase();
     private final Point2D[] redDiceCoords = {new Point2D.Double(125, 510), new Point2D.Double(225, 510)};
     private Rectangle2D attackButton = new Rectangle2D.Double(123, 738, 95, 95);
+    private Dice attackingDice = new Dice();
+    private Dice defendingDice = new Dice();
 
     public Game(ArrayList<Continent> continents, int numPlayers, String gameMode, String territorySelection) {
         this.continents = continents;
@@ -151,53 +153,24 @@ public class Game {
                 case DEFENDER_SELECTED:
                 case TWO_DICE:
                 case THREE_DICE:
-                    Player attacker = owner(attackPhase.getAttacking());
-                    Player defender = owner(attackPhase.getDefending());
-                    ArrayList<Integer> attackingDice = new ArrayList<>();
-                    ArrayList<Integer> defendingDice = new ArrayList<>();
+                    Territory attackingTerr = attackPhase.getAttacking();
+                    Territory defendingTerr = attackPhase.getDefending();
+                    Player attackingPlayer = owner(attackingTerr);
+                    Player defendingPlayer = owner(defendingTerr);
 
-                    Random rand = new Random();
+                    //Roll required number of dice for attacker and defender
+                    attackingDice.roll(attackPhase.getRedDice());
+                    defendingDice.roll(attackPhase.getWhiteDice());
 
-                    //Roll attacking dice
-                     while (attackingDice.size() < attackPhase.getRedDice()) {
-                         attackingDice.add(rand.nextInt(6) + 1);
-                     }
+                    ArrayList<Integer> casualties = Dice.compare(attackingDice, defendingDice);
+                    attackingPlayer.inflictCasualties(attackingTerr, casualties.get(0));
+                    defendingPlayer.inflictCasualties(defendingTerr, casualties.get(1));
 
-                     //Roll defending dice
-                     while (defendingDice.size() < attackPhase.getWhiteDice()) {
-                         defendingDice.add(rand.nextInt(6) + 1);
-                     }
+                    //TODO - UPDATE NUMBER OF DICE USING STATE AFTER CASUALTIES ARE INFLICTED
+                    //TODO - use dice object values to update dice pictures on board
 
-                     //Sort dice in ascending order
-                    Collections.sort(attackingDice);
-                    Collections.sort(defendingDice);
-
-                    int a = attackingDice.size() - 1;
-                    int d = defendingDice.size() - 1;
-
-                    Territory attacking = attackPhase.getAttacking();
-                    Territory defending = attackPhase.getDefending();
-
-                    //Remove soldier from losing territory
-                    while (d >= 0) {
-                        //If attacker wins, remove one soldier from defending territory
-                        if (attackingDice.get(a) > defendingDice.get(d)) {
-                            defender.getTerritories().get(defending.getName()).decrementUnits();
-                        //If defender wins, remove one soldier from attacking territory
-                        } else {
-                            attacker.getTerritories().get(attacking.getName()).decrementUnits();
-                        }
-
-                        a--;
-                        d--;
-
-                        //TODO - create dice objects within game object
-                        //TODO - use dice object values to update dice pictures on board
-                        //TODO - update state after attack
-                    }
-
-                    System.out.println("Attacking dice: " + attackingDice);
-                    System.out.println("Defending dice: " + defendingDice);
+                    System.out.println("Attacking dice: " + attackingDice.getDice());
+                    System.out.println("Defending dice: " + defendingDice.getDice());
                     //TODO - implement dice rolling animation
             }
         }
