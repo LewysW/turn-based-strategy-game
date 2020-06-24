@@ -172,7 +172,63 @@ public class Game {
                     System.out.println("Attacking dice: " + attackingDice.getDice());
                     System.out.println("Defending dice: " + defendingDice.getDice());
                     //TODO - implement dice rolling animation
+
+                    int attackingUnits = attackingPlayer.getTerritories().get(attackingTerr.getName()).getNumUnits();
+                    int defendingUnits = defendingPlayer.getTerritories().get(defendingTerr.getName()).getNumUnits();
+
+                    updateNumDice(attackingUnits, defendingUnits);
             }
+        }
+    }
+
+    /**
+     * Updates the number of dice used by the attacker and defender based on the new number of units
+     * @param attackingUnits
+     * @param defendingUnits
+     */
+    private void updateNumDice(int attackingUnits, int defendingUnits) {
+        switch (attackingUnits) {
+            //If 1 attacker left, attack must end
+            case 1:
+                attackPhase.setStage(AttackStage.NONE_SELECTED);
+                attackPhase.setRedDice(1);
+                attackPhase.setWhiteDice(1);
+                break;
+            //If two attackers left, can still attack with one dice
+            case 2:
+                switch (attackPhase.getStage()) {
+                    case TWO_DICE:
+                    case THREE_DICE:
+                        attackPhase.setStage(AttackStage.DEFENDER_SELECTED);
+                        attackPhase.setRedDice(1);
+                        attackPhase.setWhiteDice(1);
+                }
+                break;
+            //If three attackers left, can attack with two dice
+            case 3:
+                switch (attackPhase.getStage()) {
+                    case THREE_DICE:
+                        attackPhase.setStage(AttackStage.TWO_DICE);
+                        attackPhase.setRedDice(2);
+                }
+
+                break;
+        }
+
+        //Update the number of white dice
+        switch (attackPhase.getStage()) {
+            //If attacker is rolling with two or three dice...
+            case TWO_DICE:
+            case THREE_DICE:
+                //...and defender has more than 1 unit in their territory
+                if (defendingUnits > 1) {
+                    //Then the defender can roll two dice
+                    attackPhase.setWhiteDice(2);
+                    break;
+                }
+            default:
+                //Otherwise they must roll 1 dice
+                attackPhase.setWhiteDice(1);
         }
     }
 
