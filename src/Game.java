@@ -180,15 +180,50 @@ public class Game {
         ArrayList<Integer> casualties = Dice.compare(attackingDice, defendingDice);
         attackingPlayer.inflictCasualties(attackingTerr, casualties.get(0));
         defendingPlayer.inflictCasualties(defendingTerr, casualties.get(1));
-        
+
         //TODO - update state to win if defender has 0 troops remaining
 
         int attackingUnits = attackingPlayer.getTerritories().get(attackingTerr.getName()).getNumUnits();
         int defendingUnits = defendingPlayer.getTerritories().get(defendingTerr.getName()).getNumUnits();
 
         updateNumDice(attackingUnits, defendingUnits);
+
+        //If defending has lost the fight, transfer the defending territory to the attacker
+        if (defendingUnits == 0) {
+            //transfer territory
+            transferTerritory(attackingPlayer, defendingPlayer, attackingTerr, defendingTerr);
+
+            //Change to correct state
+            attackPhase.setStage(AttackStage.NONE_SELECTED);
+            //Reset number of dice
+            attackPhase.setRedDice(1);
+            attackPhase.setWhiteDice(1);
+        }
     }
 
+    /**
+     * Transfer defending territory to attacker and garrison it using troops from the attacking territory
+     * @param attacker
+     * @param defender
+     * @param attackingTerritory
+     */
+    private void transferTerritory(Player attacker, Player defender, Territory attackingTerritory, Territory defendingTerritory) {
+        //Remove territory from defending player
+        defender.getTerritories().remove(defendingTerritory.getName());
+        //Set num units of territory equal to number of attacking dice
+        defendingTerritory.setNumUnits(attackPhase.getRedDice());
+        //Assign territory to attacker
+        attacker.addTerritory(defendingTerritory);
+
+
+        //Remove troops in new territory from old territory
+        int newUnits = attackingTerritory.getNumUnits() - attackPhase.getRedDice();
+        attacker.getTerritories().get(attackingTerritory.getName()).setNumUnits(newUnits);
+    }
+
+    /**
+     * Rolls the attacking and defending dice
+     */
     public void rollDice() {
         //Roll required number of dice for attacker and defender
         attackingDice.roll(attackPhase.getRedDice());
