@@ -4,12 +4,15 @@ import java.awt.font.GlyphVector;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.Random;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
+import static java.lang.Thread.sleep;
 
 /**
  * Class to manage the swing user interface
@@ -217,7 +220,17 @@ public class UserInterface extends JPanel {
                         }
                         break;
                     case ATTACK_PHASE:
-                        game.attack(new Point2D.Double(e.getX(), e.getY()));
+                        boolean launchingAttack = game.attack(new Point2D.Double(e.getX(), e.getY()));
+
+                        //If attack is being launched
+                        if (launchingAttack) {
+                            //Animate the dice rolling
+                            animateDice();
+                            //Launch attack from first to second country
+                            game.launchAttack();
+                        }
+
+                        //Update display
                         repaint();
                 }
             }
@@ -369,24 +382,26 @@ public class UserInterface extends JPanel {
 
                         //Draw board with one dice
                         drawBoard(g, graphics2D);
+
                         //Draw first red dice
-                        graphics2D.drawImage(dice.get(Colour.RED).get(0), (int) redDiceCoords[0].getX(), (int) redDiceCoords[0].getY(), null);
+                        drawDice(graphics2D, Colour.RED, game.getAttackingDice().getDice().get(0), 1);
                         //Draw first white dice
-                        graphics2D.drawImage(dice.get(Colour.WHITE).get(0), (int) whiteDiceCoords[0].getX(), (int) whiteDiceCoords[0].getY() , null);
+                        drawDice(graphics2D, Colour.WHITE, game.getDefendingDice().getDice().get(0), 1);
 
                         //If two dice or three dice selected
                         if (stage.equals(AttackStage.TWO_DICE) || stage.equals(AttackStage.THREE_DICE)) {
                             //Draw second red dice
-                            graphics2D.drawImage(dice.get(Colour.RED).get(1), (int) redDiceCoords[1].getX(), (int) redDiceCoords[1].getY(), null);
+                            drawDice(graphics2D, Colour.RED, game.getAttackingDice().getDice().get(1), 2);
 
                             //If three dice selected
                             if (stage.equals(AttackStage.THREE_DICE)) {
-                                graphics2D.drawImage(dice.get(Colour.RED).get(2), (int) redDiceCoords[2].getX(), (int) redDiceCoords[2].getY(), null);
+                                //Draw third red dice
+                                drawDice(graphics2D, Colour.RED, game.getAttackingDice().getDice().get(2), 3);
                             }
 
                             //Draw second white dice
                             if (game.getAttackPhase().getWhiteDice() == 2) {
-                                graphics2D.drawImage(dice.get(Colour.WHITE).get(1), (int) whiteDiceCoords[1].getX(), (int) whiteDiceCoords[1].getY(), null);
+                                drawDice(graphics2D, Colour.WHITE, game.getDefendingDice().getDice().get(1), 2);
                             }
                         }
                     case ATTACKER_SELECTED:
@@ -397,6 +412,37 @@ public class UserInterface extends JPanel {
             }
         }
 
+    }
+
+    public void animateDice() {
+        System.out.println("We rolling!");
+        for (int roll = 0; roll < 5; roll++) {
+            game.rollDice();
+            //TODO - immediately draw dice area but nothing else instead of entire display
+            paintImmediately(0,0,1920, 1080);
+            try {
+                sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    /**
+     * Draw a dice to the screen
+     * @param graphics2D - to draw dice
+     * @param colour - of dice
+     * @param num - of dice
+     */
+    public void drawDice(Graphics2D graphics2D, Colour colour, int num, int dicePos) {
+        System.out.println("Dice: " + num);
+        System.out.println("dice.get(colour).size(): " + dice.get(colour).size());
+        if (colour.equals(Colour.RED)) {
+            graphics2D.drawImage(dice.get(colour).get(num - 1), (int) redDiceCoords[dicePos - 1].getX(), (int) redDiceCoords[dicePos - 1].getY(), null);
+        } else {
+            graphics2D.drawImage(dice.get(colour).get(num - 1), (int) whiteDiceCoords[dicePos - 1].getX(), (int) whiteDiceCoords[dicePos - 1].getY(), null);
+        }
     }
 
     public void drawBoard(Graphics g, Graphics2D graphics2D) {

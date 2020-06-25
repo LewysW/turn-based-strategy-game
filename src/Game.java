@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class Game {
     }
 
     //TODO split into different functions
-    public void attack(Point2D coordinate) {
+    public boolean attack(Point2D coordinate) {
         Territory territory = clickedTerritory(coordinate);
         Rectangle2D secondDice = new Rectangle2D.Double(redDiceCoords[0].getX(), redDiceCoords[0].getY(), 100, 101);
         Rectangle2D thirdDice = new Rectangle2D.Double(redDiceCoords[1].getX(), redDiceCoords[1].getY(), 100, 101);
@@ -71,6 +72,10 @@ public class Game {
             switch (attackPhase.getStage()) {
                 //If no countries have been selected
                 case NONE_SELECTED:
+                    //Reset values of attacking and defending dice
+                    attackingDice.init();
+                    defendingDice.init();
+
                     //If the selected country is owned by the current player and has more than 1 unit in it
                     if (owner == players.get(turn) && territory.getNumUnits() > 1) {
                         //Mark this territory as the attacking territory and move to next stage of attack
@@ -153,32 +158,44 @@ public class Game {
                 case DEFENDER_SELECTED:
                 case TWO_DICE:
                 case THREE_DICE:
-                    Territory attackingTerr = attackPhase.getAttacking();
-                    Territory defendingTerr = attackPhase.getDefending();
-                    Player attackingPlayer = owner(attackingTerr);
-                    Player defendingPlayer = owner(defendingTerr);
-
-                    //Roll required number of dice for attacker and defender
-                    attackingDice.roll(attackPhase.getRedDice());
-                    defendingDice.roll(attackPhase.getWhiteDice());
-
-                    ArrayList<Integer> casualties = Dice.compare(attackingDice, defendingDice);
-                    attackingPlayer.inflictCasualties(attackingTerr, casualties.get(0));
-                    defendingPlayer.inflictCasualties(defendingTerr, casualties.get(1));
-
-                    //TODO - UPDATE NUMBER OF DICE USING STATE AFTER CASUALTIES ARE INFLICTED
-                    //TODO - use dice object values to update dice pictures on board
-
-                    System.out.println("Attacking dice: " + attackingDice.getDice());
-                    System.out.println("Defending dice: " + defendingDice.getDice());
-                    //TODO - implement dice rolling animation
-
-                    int attackingUnits = attackingPlayer.getTerritories().get(attackingTerr.getName()).getNumUnits();
-                    int defendingUnits = defendingPlayer.getTerritories().get(defendingTerr.getName()).getNumUnits();
-
-                    updateNumDice(attackingUnits, defendingUnits);
+                    //returns true if attack is to be launched
+                    return true;
             }
         }
+
+        return false;
+    }
+
+    /**
+     * Carry out attack from one country to another
+     */
+    public void launchAttack() {
+        Territory attackingTerr = attackPhase.getAttacking();
+        Territory defendingTerr = attackPhase.getDefending();
+        Player attackingPlayer = owner(attackingTerr);
+        Player defendingPlayer = owner(defendingTerr);
+
+        rollDice();
+
+        ArrayList<Integer> casualties = Dice.compare(attackingDice, defendingDice);
+        attackingPlayer.inflictCasualties(attackingTerr, casualties.get(0));
+        defendingPlayer.inflictCasualties(defendingTerr, casualties.get(1));
+        
+        //TODO - update state to win if defender has 0 troops remaining
+
+        int attackingUnits = attackingPlayer.getTerritories().get(attackingTerr.getName()).getNumUnits();
+        int defendingUnits = defendingPlayer.getTerritories().get(defendingTerr.getName()).getNumUnits();
+
+        updateNumDice(attackingUnits, defendingUnits);
+    }
+
+    public void rollDice() {
+        //Roll required number of dice for attacker and defender
+        attackingDice.roll(attackPhase.getRedDice());
+        defendingDice.roll(attackPhase.getWhiteDice());
+
+        System.out.println(attackingDice.getDice());
+        System.out.println(defendingDice.getDice());
     }
 
     /**
@@ -187,6 +204,7 @@ public class Game {
      * @param defendingUnits
      */
     private void updateNumDice(int attackingUnits, int defendingUnits) {
+        //Update the number of attacking dice
         switch (attackingUnits) {
             //If 1 attacker left, attack must end
             case 1:
@@ -215,7 +233,7 @@ public class Game {
                 break;
         }
 
-        //Update the number of white dice
+        //Update the number of defending dice
         switch (attackPhase.getStage()) {
             //If attacker is rolling with two or three dice...
             case TWO_DICE:
@@ -232,7 +250,15 @@ public class Game {
         }
     }
 
-    private boolean attackButtonClicked(Point2D coordinate) {
+    public Dice getAttackingDice() {
+        return attackingDice;
+    }
+
+    public Dice getDefendingDice() {
+        return defendingDice;
+    }
+
+    public boolean attackButtonClicked(Point2D coordinate) {
         return attackButton.contains(coordinate.getX(), coordinate.getY());
     }
 

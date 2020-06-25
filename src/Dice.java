@@ -7,6 +7,14 @@ public class Dice {
 
     public Dice() {
         die = new ArrayList<>();
+        init();
+    }
+
+    public void init() {
+        die.clear();
+        die.add(1);
+        die.add(2);
+        die.add(3);
     }
 
     public void roll(int num) {
