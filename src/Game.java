@@ -25,8 +25,6 @@ public class Game {
         this.autoSelection = territorySelection.equals("Automatic");
         this.turn = 0;
 
-        System.out.println("players.size(): " + players.size());
-
         ArrayList<Integer> playerIndex = new ArrayList<>();
 
         //Get index of each player
@@ -81,7 +79,6 @@ public class Game {
                         //Mark this territory as the attacking territory and move to next stage of attack
                         attackPhase.setStage(AttackStage.ATTACKER_SELECTED);
                         attackPhase.setAttacking(territory);
-                        System.out.println("Attacking from " + territory.getName());
                     }
                     break;
                 //If the attacking territory has been selected
@@ -96,7 +93,6 @@ public class Game {
                         attackPhase.setStage(AttackStage.DEFENDER_SELECTED);
                         //Set defender to enemy territory
                         attackPhase.setDefending(territory);
-                        System.out.println(territory.getName() + " is defending");
                     }
                     break;
                 case DEFENDER_SELECTED:
@@ -187,38 +183,43 @@ public class Game {
         int defendingUnits = defendingPlayer.getTerritories().get(defendingTerr.getName()).getNumUnits();
 
         updateNumDice(attackingUnits, defendingUnits);
-
-        //If defending has lost the fight, transfer the defending territory to the attacker
-        if (defendingUnits == 0) {
-            //transfer territory
-            transferTerritory(attackingPlayer, defendingPlayer, attackingTerr, defendingTerr);
-
-            //Change to correct state
-            attackPhase.setStage(AttackStage.NONE_SELECTED);
-            //Reset number of dice
-            attackPhase.setRedDice(1);
-            attackPhase.setWhiteDice(1);
-        }
     }
 
     /**
      * Transfer defending territory to attacker and garrison it using troops from the attacking territory
-     * @param attacker
-     * @param defender
-     * @param attackingTerritory
+     * @param location - to display dialogue window
      */
-    private void transferTerritory(Player attacker, Player defender, Territory attackingTerritory, Territory defendingTerritory) {
+    public void transferTerritory(Point2D location) {
+        Territory attackingTerritory = attackPhase.getAttacking();
+        Territory defendingTerritory = attackPhase.getDefending();
+        Player attacker = owner(attackingTerritory);
+        Player defender = owner(defendingTerritory);
+
+        String msg = "Select Number of Troops to Occupy Conquered Territory:";
+        String title = "Victory!";
+        int min = attackPhase.getRedDice();
+        int max = attackingTerritory.getNumUnits() - 1;
+
+        int numTroops = (max > min) ? TroopTransferDialogue.display(title, msg, min, max, false, location) : max;
+
         //Remove territory from defending player
         defender.getTerritories().remove(defendingTerritory.getName());
-        //Set num units of territory equal to number of attacking dice
-        defendingTerritory.setNumUnits(attackPhase.getRedDice());
+        //Set num units of territory equal to number of units selected by attacker
+        defendingTerritory.setNumUnits(numTroops);
         //Assign territory to attacker
         attacker.addTerritory(defendingTerritory);
 
-
         //Remove troops in new territory from old territory
-        int newUnits = attackingTerritory.getNumUnits() - attackPhase.getRedDice();
+        int newUnits = attackingTerritory.getNumUnits() - numTroops;
         attacker.getTerritories().get(attackingTerritory.getName()).setNumUnits(newUnits);
+    }
+
+    public void resetAttackPhase() {
+        //Change to correct state
+        attackPhase.setStage(AttackStage.NONE_SELECTED);
+        //Reset number of dice
+        attackPhase.setRedDice(1);
+        attackPhase.setWhiteDice(1);
     }
 
     /**
@@ -228,9 +229,6 @@ public class Game {
         //Roll required number of dice for attacker and defender
         attackingDice.roll(attackPhase.getRedDice());
         defendingDice.roll(attackPhase.getWhiteDice());
-
-        System.out.println(attackingDice.getDice());
-        System.out.println(defendingDice.getDice());
     }
 
     /**
@@ -319,7 +317,6 @@ public class Game {
                     //Sets turn to next player
                     updateTurn();
 
-                    System.out.println(players.get(turn).getColour() + " Player's Turn!");
                     //If all territories are occupied, switch to troop deployment
                     if (worldOccupied()) {
                         state = State.TROOP_DEPLOYMENT;
@@ -343,8 +340,6 @@ public class Game {
                         //Sets turn to next player
                         if (state == State.TROOP_DEPLOYMENT) {
                             updateTurn();
-                            System.out.println(players.get(turn).getColour() + " Player's Turn!");
-
 
                             if (troopsDeployed()) {
                                 //Move to reinforcement phase
@@ -437,7 +432,6 @@ public class Game {
         for (Continent continent : continents) {
             for (Territory territory : continent.getTerritories()) {
                 if (territory.getBorder().contains(coordinate)) {
-                    System.out.println(territory.getName() + " has been clicked!");
                     return territory;
                 }
             }

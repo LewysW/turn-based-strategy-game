@@ -3,7 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="044007da-0a2d-4dbe-b825-8131c3fae1fb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/strategy-game/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/strategy-game/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/strategy-game/UserInterface$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/strategy-game/UserInterface$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/strategy-game/UserInterface$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/strategy-game/UserInterface$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/strategy-game/UserInterface$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/strategy-game/UserInterface$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/strategy-game/UserInterface$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/strategy-game/UserInterface$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/strategy-game/UserInterface$SliderListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/strategy-game/UserInterface$SliderListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/strategy-game/UserInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/strategy-game/UserInterface.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,15 +36,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/UserInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-136">
-              <caret line="423" column="24" selection-start-line="423" selection-start-column="24" selection-end-line="423" selection-end-column="24" />
+            <state relative-caret-position="268">
+              <caret line="203" column="43" selection-start-line="203" selection-start-column="43" selection-end-line="203" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#init#0;class#UserInterface#0" />
+                <element signature="e#8331#8332#0" expanded="true" />
                 <element signature="class#SliderListener#0;class#UserInterface#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/TroopTransferDialogue.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="630">
+              <caret line="42" column="24" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Game.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="491">
+              <caret line="221" column="8" selection-start-line="221" selection-start-column="8" selection-end-line="221" selection-end-column="8" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#deployUnit#0;class#Game#0" />
+                <element signature="method#calculateTroops#0;class#Game#0" />
+                <element signature="method#troopsDeployed#0;class#Game#0" />
+                <element signature="method#worldOccupied#0;class#Game#0" />
+                <element signature="method#clickedTerritory#0;class#Game#0" />
+                <element signature="method#updateTurn#0;class#Game#0" />
               </folding>
             </state>
           </provider>
@@ -45,7 +84,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AttackPhase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
+            <state relative-caret-position="622">
               <caret line="62" column="41" selection-start-line="62" selection-start-column="41" selection-end-line="62" selection-end-column="41" />
               <folding>
                 <element signature="e#1064#1065#0" expanded="true" />
@@ -55,24 +94,6 @@
                 <element signature="e#1240#1241#0" expanded="true" />
                 <element signature="e#1287#1288#0" expanded="true" />
                 <element signature="e#1329#1330#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Game.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="193" column="94" selection-start-line="193" selection-start-column="94" selection-end-line="193" selection-end-column="94" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#deployUnit#0;class#Game#0" />
-                <element signature="method#calculateTroops#0;class#Game#0" />
-                <element signature="method#troopsDeployed#0;class#Game#0" />
-                <element signature="method#worldOccupied#0;class#Game#0" />
-                <element signature="method#clickedTerritory#0;class#Game#0" />
-                <element signature="method#updateTurn#0;class#Game#0" />
               </folding>
             </state>
           </provider>
@@ -150,6 +171,9 @@
       <find>gets</find>
       <find>Stroke</find>
       <find>Rand</find>
+      <find>font</find>
+      <find>System.out.println</find>
+      <find>System.out.</find>
     </findStrings>
     <replaceStrings>
       <replace>gameScreen</replace>
@@ -176,8 +200,11 @@
         <option value="$PROJECT_DIR$/src/Territory.java" />
         <option value="$PROJECT_DIR$/src/Player.java" />
         <option value="$PROJECT_DIR$/src/Dice.java" />
-        <option value="$PROJECT_DIR$/src/UserInterface.java" />
+        <option value="$PROJECT_DIR$/src/TroopTransferWindow.java" />
+        <option value="$PROJECT_DIR$/src/Scale.java" />
+        <option value="$PROJECT_DIR$/src/TroopTransferDialogue.java" />
         <option value="$PROJECT_DIR$/src/Game.java" />
+        <option value="$PROJECT_DIR$/src/UserInterface.java" />
       </list>
     </option>
   </component>
@@ -188,16 +215,15 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2220" />
-    <option name="width" value="939" />
-    <option name="height" value="1035" />
+    <option name="x" value="2186" />
+    <option name="width" value="929" />
+    <option name="height" value="1033" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -215,12 +241,13 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1593050833767" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1593379029058" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -293,18 +320,20 @@
       <workItem from="1592921837530" duration="6000000" />
       <workItem from="1593003720542" duration="7000" />
       <workItem from="1593043442548" duration="7359000" />
-      <workItem from="1593081456168" duration="4753000" />
+      <workItem from="1593081456168" duration="5603000" />
+      <workItem from="1593134280416" duration="787000" />
+      <workItem from="1593351848037" duration="4508000" />
+      <workItem from="1593369022586" duration="8231000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="147536000" />
+    <option name="totallyTimeSpent" value="161912000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="-1" width="1920" height="1080" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3420491" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.35378867" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -463,7 +492,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AttackPhase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
+        <state relative-caret-position="622">
           <caret line="62" column="41" selection-start-line="62" selection-start-column="41" selection-end-line="62" selection-end-column="41" />
           <folding>
             <element signature="e#1064#1065#0" expanded="true" />
@@ -477,22 +506,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/UserInterface.java">
+    <entry file="file://$PROJECT_DIR$/src/Scale.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-136">
-          <caret line="423" column="24" selection-start-line="423" selection-start-column="24" selection-end-line="423" selection-end-column="24" />
+        <state relative-caret-position="1470">
+          <caret line="98" column="44" selection-start-line="98" selection-start-column="44" selection-end-line="98" selection-end-column="44" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#init#0;class#UserInterface#0" />
-            <element signature="class#SliderListener#0;class#UserInterface#0" />
+            <element signature="e#2933#2934#0" expanded="true" />
+            <element signature="e#2967#2968#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="193" column="94" selection-start-line="193" selection-start-column="94" selection-end-line="193" selection-end-column="94" />
+        <state relative-caret-position="491">
+          <caret line="221" column="8" selection-start-line="221" selection-start-column="8" selection-end-line="221" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#deployUnit#0;class#Game#0" />
@@ -501,6 +529,29 @@
             <element signature="method#worldOccupied#0;class#Game#0" />
             <element signature="method#clickedTerritory#0;class#Game#0" />
             <element signature="method#updateTurn#0;class#Game#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TroopTransferDialogue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="42" column="24" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UserInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="203" column="43" selection-start-line="203" selection-start-column="43" selection-end-line="203" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#init#0;class#UserInterface#0" />
+            <element signature="e#8331#8332#0" expanded="true" />
+            <element signature="class#SliderListener#0;class#UserInterface#0" />
           </folding>
         </state>
       </provider>

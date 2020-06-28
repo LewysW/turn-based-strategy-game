@@ -206,9 +206,6 @@ public class UserInterface extends JPanel {
             // override only those which interests us
             @Override //I override only one method for presentation
             public void mousePressed(MouseEvent e) {
-                System.out.println(e.getX() + ", " + e.getY());
-
-
                 switch (game.getState()) {
                     case TERRITORY_SELECTION:
                     case TROOP_DEPLOYMENT:
@@ -228,6 +225,18 @@ public class UserInterface extends JPanel {
                             animateDice();
                             //Launch attack from first to second country
                             game.launchAttack();
+
+                            //Update territories
+                            if (game.getAttackPhase().getDefending().getNumUnits() == 0) {
+                                repaint();
+
+                                //transfer territory
+                                double x = (gameScreen.getLocationOnScreen().getX() + gameScreen.getWidth()) / 2;
+                                double y = (gameScreen.getLocationOnScreen().getY() + gameScreen.getHeight()) / 2;
+                                System.out.println("(x,y) - " + "(" + x + "," + y + ")");
+                                game.transferTerritory(new Point2D.Double(x, y));
+                                game.resetAttackPhase();
+                            }
                         }
 
                         //Update display
@@ -376,7 +385,6 @@ public class UserInterface extends JPanel {
                     case DEFENDER_SELECTED:
                     case TWO_DICE:
                     case THREE_DICE:
-                        System.out.println("Drawing defending border!");
                         graphics2D.setColor(Color.RED);
                         graphics2D.draw(game.getAttackPhase().getDefending().getBorder());
 
@@ -415,7 +423,6 @@ public class UserInterface extends JPanel {
     }
 
     public void animateDice() {
-        System.out.println("We rolling!");
         for (int roll = 0; roll < 5; roll++) {
             game.rollDice();
             //TODO - immediately draw dice area but nothing else instead of entire display
@@ -436,8 +443,6 @@ public class UserInterface extends JPanel {
      * @param num - of dice
      */
     public void drawDice(Graphics2D graphics2D, Colour colour, int num, int dicePos) {
-        System.out.println("Dice: " + num);
-        System.out.println("dice.get(colour).size(): " + dice.get(colour).size());
         if (colour.equals(Colour.RED)) {
             graphics2D.drawImage(dice.get(colour).get(num - 1), (int) redDiceCoords[dicePos - 1].getX(), (int) redDiceCoords[dicePos - 1].getY(), null);
         } else {
