@@ -1,3 +1,8 @@
+ukraine
+ural
+china
+india
+middle_east
 1133, 379
 1047,379
 1047,376

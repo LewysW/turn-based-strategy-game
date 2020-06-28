@@ -1,3 +1,6 @@
+siam
+western_australia
+new_guinea
 1366, 682
 1306,717
 1306,716

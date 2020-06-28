@@ -1,3 +1,7 @@
+siam
+china
+afghanistan
+middle_east
 1200, 565
 1299,511
 1298,513

@@ -1,3 +1,6 @@
+north_africa
+east_africa
+southern_africa
 893, 740
 904,671
 904,672

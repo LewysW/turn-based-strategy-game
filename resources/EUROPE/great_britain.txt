@@ -1,3 +1,7 @@
+iceland
+northern_europe
+western_europe
+scandinavia
 789, 294
 782,260
 780,260

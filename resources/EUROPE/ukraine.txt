@@ -1,3 +1,9 @@
+scandinavia
+northern_europe
+southern_europe
+middle_east
+afghanistan
+ural
 971, 292
 946,136
 944,142

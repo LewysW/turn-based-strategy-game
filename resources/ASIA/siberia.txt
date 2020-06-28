@@ -1,3 +1,8 @@
+yakutsk
+irkutsk
+mongolia
+china
+ural
 1273, 216
 1187,186
 1189,189

@@ -1,3 +1,6 @@
+greenland
+great_britain
+scandinavia
 775, 212
 751,211
 749,207

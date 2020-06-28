@@ -1,3 +1,9 @@
+northwest_territories
+alberta
+quebec
+greenland
+eastern_united_states
+western_united_states
 457, 268
 473,228
 468,228

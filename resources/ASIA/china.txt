@@ -1,3 +1,9 @@
+mongolia
+siberia
+ural
+afghanistan
+india
+siam
 1307, 445
 1399,411
 1399,416

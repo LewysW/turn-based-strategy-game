@@ -1,3 +1,6 @@
+indonesia
+western_australia
+eastern_australia
 1525, 716
 1490,686
 1489,687

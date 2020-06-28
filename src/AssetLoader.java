@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
@@ -26,9 +27,10 @@ public class AssetLoader {
         LinkedHashMap<String, BufferedImage> images = loadImages();
         LinkedHashMap<String, Path2D> borders = loadBorders();
         LinkedHashMap<String, Point2D> troopCoords = loadTroopCoords();
+        LinkedHashMap<String, LinkedHashSet<String>> adjacentTerritories = loadAdjacentTerritories();
 
         for (String continent : continentNames) {
-            ArrayList<Territory> territories = loadTerritories(continent, images, borders, troopCoords);
+            ArrayList<Territory> territories = createTerritories(continent, images, borders, troopCoords, adjacentTerritories);
 
             switch (continent) {
                 case "AUSTRALASIA":
@@ -50,8 +52,18 @@ public class AssetLoader {
         return continents;
     }
 
-    public ArrayList<Territory> loadTerritories(String continent, LinkedHashMap<String, BufferedImage> images,
-                                                LinkedHashMap<String, Path2D> borders, LinkedHashMap<String, Point2D> troopCoords) {
+    /**
+     * Loads the data required to store each territory on the game map
+     * @param continent
+     * @param images
+     * @param borders
+     * @param troopCoords
+     * @return
+     */
+    public ArrayList<Territory> createTerritories(String continent, LinkedHashMap<String, BufferedImage> images,
+                                                LinkedHashMap<String, Path2D> borders, LinkedHashMap<String, Point2D> troopCoords,
+                                                  LinkedHashMap<String, LinkedHashSet<String>> adjacentTerritories) {
+
         ArrayList<Territory> territories = new ArrayList<>();
 
         for (String territory : images.keySet()) {
@@ -64,7 +76,8 @@ public class AssetLoader {
                 BufferedImage image = images.get(territory);
                 Path2D border = borders.get(territory);
                 Point2D troopCoord = troopCoords.get(territory);
-                territories.add(new Territory(name, image, border, troopCoord));
+                LinkedHashSet<String> adjacent = adjacentTerritories.get(territory);
+                territories.add(new Territory(name, image, border, troopCoord, adjacent));
             }
         }
 
@@ -182,6 +195,9 @@ public class AssetLoader {
 
                     BufferedReader br = Files.newBufferedReader(file.toPath());
 
+                    //skip over lines containing territories instead of coordinates
+                    while (!(br.readLine()).matches(".*\\d.*"));
+
                     //Skips over troop coordinate of country
                     String line = br.readLine();
 
@@ -231,9 +247,12 @@ public class AssetLoader {
 
                     BufferedReader br = Files.newBufferedReader(file.toPath());
 
-                    //Gets troop coordinate of territory
-                    String line = br.readLine();
+                    String line;
 
+                    //skip over lines containing territories instead of coordinates
+                    while (!(line = br.readLine()).matches(".*\\d.*"));
+
+                    //Parse coordinate of first numeric line
                     double troopX = Double.parseDouble(line.split(",")[0]);
                     double troopY = Double.parseDouble(line.split(",")[1]);
 
@@ -246,6 +265,49 @@ public class AssetLoader {
         }
 
         return troopCoords;
+    }
+
+    /**
+     * Loads territories names which are adjacent to the current territory
+     * @return sets of names of adjacent territories
+     */
+    public LinkedHashMap<String, LinkedHashSet<String>> loadAdjacentTerritories() {
+        LinkedHashMap<String, LinkedHashSet<String>> adjacentTerritories = new LinkedHashMap<>();
+
+        try {
+            List<File> filesInFolder = Files.walk(Paths.get("resources/"))
+                    .filter(Files::isRegularFile)
+                    .map(Path::toFile)
+                    .collect(Collectors.toList());
+
+            for (File file : filesInFolder) {
+                if (file.toString().endsWith(".txt")) {
+                    //Gets name of file before '.txt'
+                    int indexOfExt = file.toString().indexOf(".");
+                    int indexOfSlash = file.toString().indexOf("/");
+
+                    String territoryName = file.toString().substring(indexOfSlash + 1, indexOfExt);
+                    LinkedHashSet<String> names = new LinkedHashSet<>();
+
+                    BufferedReader br = Files.newBufferedReader(file.toPath());
+
+                    String line;
+
+                    //add all territory names to set of names for current territory
+                    while (!(line = br.readLine()).matches(".*\\d.*")) {
+                        line = line.trim();
+                        names.add(line);
+                    }
+
+                    adjacentTerritories.put(territoryName, names);
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return adjacentTerritories;
     }
 
     /**

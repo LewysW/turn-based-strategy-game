@@ -1,3 +1,6 @@
+kamchatka
+irkutsk
+siberia
 1423, 174
 1370,120
 1376,129

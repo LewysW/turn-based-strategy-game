@@ -1,3 +1,8 @@
+irkutsk
+kamchatka
+japan
+china
+siberia
 1413, 350
 1486,343
 1484,349

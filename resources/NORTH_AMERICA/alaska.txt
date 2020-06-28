@@ -1,3 +1,6 @@
+kamchatka
+northwest_territories
+alberta
 206, 170
 258,135
 255,135

@@ -1,3 +1,7 @@
+southern_europe
+middle_east
+north_africa
+east_africa
 905, 542
 964, 518
 960, 518

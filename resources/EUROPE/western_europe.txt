@@ -1,3 +1,7 @@
+great_britain
+northern_europe
+southern_europe
+north_africa
 784, 425
 813,342
 808,344

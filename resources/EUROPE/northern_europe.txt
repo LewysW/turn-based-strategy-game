@@ -1,3 +1,8 @@
+great_britain
+western_europe
+southern_europe
+scandinavia
+ukraine
 868, 328
 812,339
 818,334

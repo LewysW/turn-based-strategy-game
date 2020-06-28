@@ -1,3 +1,7 @@
+ukraine
+siberia
+china
+afghanistan
 1160, 244
 1132,151
 1133,153

@@ -1,3 +1,6 @@
+western_united_states
+eastern_united_states
+venezuela
 426, 504
 352,464
 350,462

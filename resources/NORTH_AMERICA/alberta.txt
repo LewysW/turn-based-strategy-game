@@ -1,3 +1,7 @@
+alaska
+northwest_territories
+ontario
+western_united_states
 364, 260
 429,226
 429,240

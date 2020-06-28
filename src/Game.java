@@ -87,8 +87,8 @@ public class Game {
                     if (territory == attackPhase.getAttacking()) {
                         //Deselect it by moving back to previous stage
                         attackPhase.setStage(AttackStage.NONE_SELECTED);
-                    //Otherwise if an enemy territory has been selected
-                    } else if (owner != players.get(turn)) {
+                    //Otherwise if an enemy territory has been selected which is also adjacent to the attacking territory
+                    } else if (owner != players.get(turn) && attackPhase.getAttacking().getAdjacent().contains(territory.getName())) {
                         //Move to next stage
                         attackPhase.setStage(AttackStage.DEFENDER_SELECTED);
                         //Set defender to enemy territory

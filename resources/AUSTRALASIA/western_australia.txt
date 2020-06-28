@@ -1,3 +1,6 @@
+eastern_australia
+indonesia
+new_guinea
 1358, 851
 1394,789
 1393,787

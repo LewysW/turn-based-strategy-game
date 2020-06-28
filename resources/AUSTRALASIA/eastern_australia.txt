@@ -1,3 +1,5 @@
+western_australia
+new_guinea
 1497, 868
 1400,793
 1400,795

@@ -1,3 +1,7 @@
+alaska
+alberta
+ontario
+greenland
 339, 179
 265,141
 263,155

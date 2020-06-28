@@ -1,3 +1,7 @@
+iceland
+great_britain
+northern_europe
+ukraine
 862, 216
 944,129
 946,127
