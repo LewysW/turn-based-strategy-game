@@ -16,6 +16,7 @@ public class Game {
     private AttackPhase attackPhase = new AttackPhase();
     private final Point2D[] redDiceCoords = {new Point2D.Double(125, 510), new Point2D.Double(225, 510)};
     private Rectangle2D attackButton = new Rectangle2D.Double(123, 738, 95, 95);
+    private Rectangle turnButton = new Rectangle(70, 20, 120, 80);
     private Dice attackingDice = new Dice();
     private Dice defendingDice = new Dice();
 
@@ -57,6 +58,11 @@ public class Game {
 
     //TODO split into different functions
     public boolean attack(Point2D coordinate) {
+        if (endAttackPhase(coordinate)) {
+            state = State.TACTICAL_MOVE_PHASE;
+            return false;
+        }
+
         Territory territory = clickedTerritory(coordinate);
         Rectangle2D secondDice = new Rectangle2D.Double(redDiceCoords[0].getX(), redDiceCoords[0].getY(), 100, 101);
         Rectangle2D thirdDice = new Rectangle2D.Double(redDiceCoords[1].getX(), redDiceCoords[1].getY(), 100, 101);
@@ -160,6 +166,10 @@ public class Game {
         }
 
         return false;
+    }
+
+    private boolean endAttackPhase(Point2D click) {
+        return turnButton.contains(click);
     }
 
     /**
@@ -476,11 +486,22 @@ public class Game {
         }
     }
 
+    /**
+     * Updates turn by incrementing turn counter to next player
+     */
     public void updateTurn() {
+        //Increment turn counter
         turn++;
 
+        //If end of list of players has been reached...
         if (turn == players.size()) {
+            //...wrap around to first player
             turn = 0;
+        }
+
+        //If player has no more territories, update turn again
+        if (players.get(turn).getTerritories().size() == 0) {
+            updateTurn();
         }
     }
 

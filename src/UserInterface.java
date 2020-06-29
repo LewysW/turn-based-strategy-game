@@ -75,6 +75,8 @@ public class UserInterface extends JPanel {
             new Point2D.Double(125, 510), new Point2D.Double(225, 510)};
     private static final Point2D[] whiteDiceCoords = {new Point2D.Double(70, 620), new Point2D.Double(170, 620)};
 
+    private static Rectangle turnButton = new Rectangle(70, 20, 120, 80);
+
     private static void loadAssets() {
         //Loads in images and borders
         AssetLoader assetLoader = new AssetLoader();
@@ -374,12 +376,31 @@ public class UserInterface extends JPanel {
                 }
             }
 
+            //Display button to end attack or tactical move phase
+            switch (game.getState()) {
+                case ATTACK_PHASE:
+                case TACTICAL_MOVE_PHASE:
+                    //Display button
+                    graphics2D.setColor(Color.BLACK);
+                    graphics2D.setStroke(new BasicStroke(3));
+                    graphics2D.draw(turnButton);
+                    graphics2D.setColor(new Color(46, 184, 46));
+                    graphics2D.fill(turnButton);
+                    graphics2D.setColor(Color.black);
+
+                    if (game.getState() == State.ATTACK_PHASE) {
+                        graphics2D.drawString("End Attack", (int) turnButton.getCenterX() - 35, (int) turnButton.getCenterY() - 5);
+                        graphics2D.drawString("Phase", (int) turnButton.getCenterX() - 20, (int) turnButton.getCenterY() + 10);
+                    } else {
+                        graphics2D.drawString("End Turn", (int) turnButton.getCenterX() - 27, (int) turnButton.getCenterY() + 5);
+                    }
+                    break;
+            }
+
             //TODO - move to function
             //Draw outline of attacking and defending countries if selected during attack phase
             if (game.getState() == State.ATTACK_PHASE) {
-                graphics2D.setStroke(new BasicStroke(5));
                 AttackStage stage = game.getAttackPhase().getStage();
-
 
                 switch (stage) {
                     case DEFENDER_SELECTED:
