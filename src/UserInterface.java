@@ -208,18 +208,27 @@ public class UserInterface extends JPanel {
             // override only those which interests us
             @Override //I override only one method for presentation
             public void mousePressed(MouseEvent e) {
+                //Midpoint of display
+                double x = (gameScreen.getLocationOnScreen().getX() + gameScreen.getWidth()) / 2;
+                double y = (gameScreen.getLocationOnScreen().getY() + gameScreen.getHeight()) / 2;
+                Point2D midpoint = new Point2D.Double(x, y);
+
+                //Coordinate clicked
+                Point2D coordinate = new Point2D.Double(e.getX(), e.getY());
+
+                //Use point differently depending on the state of the game
                 switch (game.getState()) {
                     case TERRITORY_SELECTION:
                     case TROOP_DEPLOYMENT:
                     case REINFORCEMENTS:
-                        boolean deployed = game.deployUnit(new Point2D.Double(e.getX(), e.getY()));
+                        boolean deployed = game.deployUnit(coordinate);
 
                         if (deployed) {
                             repaint();
                         }
                         break;
                     case ATTACK_PHASE:
-                        boolean launchingAttack = game.attack(new Point2D.Double(e.getX(), e.getY()));
+                        boolean launchingAttack = game.attack(coordinate);
 
                         //If attack is being launched
                         if (launchingAttack) {
@@ -232,17 +241,25 @@ public class UserInterface extends JPanel {
                             if (game.getAttackPhase().getDefending().getNumUnits() == 0) {
                                 repaint();
 
-                                //transfer territory
-                                double x = (gameScreen.getLocationOnScreen().getX() + gameScreen.getWidth()) / 2;
-                                double y = (gameScreen.getLocationOnScreen().getY() + gameScreen.getHeight()) / 2;
                                 System.out.println("(x,y) - " + "(" + x + "," + y + ")");
-                                game.transferTerritory(new Point2D.Double(x, y));
+                                game.transferTerritory(midpoint);
                                 game.resetAttackPhase();
                             }
                         }
 
                         //Update display
                         repaint();
+                        break;
+                    case TACTICAL_MOVE_PHASE:
+                        if (game.tacticalMovePhase(coordinate)) {
+                                repaint();
+                                game.transferTroops(midpoint);
+                        }
+
+                        //Update display
+                        repaint();
+                        break;
+
                 }
             }
         });
@@ -332,7 +349,7 @@ public class UserInterface extends JPanel {
             graphics2D.drawImage(currentPlayer, 17, 10, currentPlayer.getWidth() / 4, currentPlayer.getHeight() / 4, null);
 
             //TODO - move to function
-            //Draw troop icon in top left of
+            //Draw troop icon in top left of display
             switch (game.getState()) {
                 case TROOP_DEPLOYMENT:
                 case REINFORCEMENTS:
@@ -438,6 +455,20 @@ public class UserInterface extends JPanel {
                         graphics2D.draw(game.getAttackPhase().getAttacking().getBorder());
                         break;
                 }
+            } else if (game.getState() == State.TACTICAL_MOVE_PHASE) {
+                MoveStage stage = game.getTacticalMovePhase().getStage();
+
+                switch (stage) {
+                    //Draw border of destination territory if selected
+                    case DESTINATION_SELECTED:
+                        graphics2D.setColor(Color.GREEN);
+                        graphics2D.draw(game.getTacticalMovePhase().getDestination().getBorder());
+                    //Draw border of source territory if selected
+                    case SOURCE_SELECTED:
+                        graphics2D.setColor(Color.BLUE);
+                        graphics2D.draw(game.getTacticalMovePhase().getSource().getBorder());
+                        break;
+                }
             }
         }
 
@@ -446,7 +477,6 @@ public class UserInterface extends JPanel {
     public void animateDice() {
         for (int roll = 0; roll < 5; roll++) {
             game.rollDice();
-            //TODO - immediately draw dice area but nothing else instead of entire display
             paintImmediately(0,0,1920, 1080);
             try {
                 sleep(200);

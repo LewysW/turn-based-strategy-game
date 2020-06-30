@@ -14,6 +14,7 @@ public class Game {
     private int turn;
     private State state;
     private AttackPhase attackPhase = new AttackPhase();
+    private TacticalMovePhase tacticalMovePhase = new TacticalMovePhase();
     private final Point2D[] redDiceCoords = {new Point2D.Double(125, 510), new Point2D.Double(225, 510)};
     private Rectangle2D attackButton = new Rectangle2D.Double(123, 738, 95, 95);
     private Rectangle turnButton = new Rectangle(70, 20, 120, 80);
@@ -56,9 +57,56 @@ public class Game {
         }
     }
 
+    //TODO - split into different functions
+    public boolean tacticalMovePhase(Point2D coordinate) {
+        //If next turn button clicked
+        if (nextPhase(coordinate)) {
+            //Update turn and switch state to reinforcements
+            updateTurn();
+            state = State.REINFORCEMENTS;
+            //calculate number of troops for new player
+            players.get(turn).setNumTroops(calculateTroops(players.get(turn).getTerritories()));
+            return false;
+        }
+
+        Territory territory = clickedTerritory(coordinate);
+
+        //If territory was clicked
+        if (territory != null) {
+            //Get the owner of that territory
+            Player owner = owner(territory);
+
+            switch (tacticalMovePhase.getStage()) {
+                case NONE_SELECTED:
+                    //If the selected country is owned by the current player and has more than 1 unit in it
+                    if (owner == players.get(turn) && territory.getNumUnits() > 1) {
+                        //Mark this territory as the attacking territory and move to next stage of attack
+                        tacticalMovePhase.setStage(MoveStage.SOURCE_SELECTED);
+                        tacticalMovePhase.setSource(territory);
+                    }
+                    break;
+                case SOURCE_SELECTED:
+                    //If the source territory is clicked again
+                    if (territory == tacticalMovePhase.getSource()) {
+                        //Deselect it by moving back to previous stage
+                        tacticalMovePhase.setStage(MoveStage.NONE_SELECTED);
+                        //Otherwise if a friendly territory has been selected which is also adjacent to the attacking territory
+                    } else if (owner == players.get(turn) && tacticalMovePhase.getSource().getAdjacent().contains(territory.getName())) {
+                        //Select destination territory
+                        tacticalMovePhase.setStage(MoveStage.DESTINATION_SELECTED);
+                        tacticalMovePhase.setDestination(territory);
+                        return true;
+                    }
+                    break;
+            }
+        }
+        return false;
+    }
+
     //TODO split into different functions
     public boolean attack(Point2D coordinate) {
-        if (endAttackPhase(coordinate)) {
+        //If next phase button clicked, then switch to tactical move phase
+        if (nextPhase(coordinate)) {
             state = State.TACTICAL_MOVE_PHASE;
             return false;
         }
@@ -168,7 +216,7 @@ public class Game {
         return false;
     }
 
-    private boolean endAttackPhase(Point2D click) {
+    private boolean nextPhase(Point2D click) {
         return turnButton.contains(click);
     }
 
@@ -193,6 +241,43 @@ public class Game {
         int defendingUnits = defendingPlayer.getTerritories().get(defendingTerr.getName()).getNumUnits();
 
         updateNumDice(attackingUnits, defendingUnits);
+    }
+
+    /**
+     * Transfer troops from first territory to second territory
+     * @param location - to display dialogue window
+     */
+    public void transferTroops(Point2D location) {
+        Territory source = tacticalMovePhase.getSource();
+        Territory destination = tacticalMovePhase.getDestination();
+
+        String msg = "Select Number of Troops to Move to Territory:";
+        String title = "Tactical Move Phase";
+
+        int min = 2;
+        int max = source.getNumUnits() - 1;
+
+        int numTroops = TroopTransferDialogue.display(title, msg, min, max, true, location);
+
+        //If cancel was selected
+        if (numTroops == 0) {
+            tacticalMovePhase.setStage(MoveStage.NONE_SELECTED);
+        } else {
+            //Add units to destination territory
+            players.get(turn).getTerritories().get(destination.getName()).setNumUnits(numTroops);
+
+            //Remove troops in new territory from old territory
+            int newUnits = source.getNumUnits() - numTroops;
+            players.get(turn).getTerritories().get(source.getName()).setNumUnits(newUnits);
+
+            tacticalMovePhase.setStage(MoveStage.NONE_SELECTED);
+
+            //Update turn and switch state to reinforcements
+            updateTurn();
+            //calculate number of troops for new player
+            players.get(turn).setNumTroops(calculateTroops(players.get(turn).getTerritories()));
+            state = State.REINFORCEMENTS;
+        }
     }
 
     /**
@@ -375,6 +460,12 @@ public class Game {
         return false;
     }
 
+    /**
+     * Calculates number of reinforcements the player receives
+     * at the start of their turn
+     * @param territories - used to calculate number of starting troops
+     * @return - number of troops
+     */
     private int calculateTroops(LinkedHashMap<String, Territory> territories) {
         //Calculate number of troops based on number of territories
         int troops = (territories.size() < 9) ? 3 : Math.floorDiv(territories.size(), 3);
@@ -519,5 +610,9 @@ public class Game {
 
     public AttackPhase getAttackPhase() {
         return attackPhase;
+    }
+
+    public TacticalMovePhase getTacticalMovePhase() {
+        return tacticalMovePhase;
     }
 }
