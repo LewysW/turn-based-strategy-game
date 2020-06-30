@@ -1,6 +1,7 @@
 egypt
 east_africa
 congo
+western_europe
 785, 586
 849,496
 849,493

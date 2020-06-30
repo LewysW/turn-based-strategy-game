@@ -591,7 +591,7 @@ public class Game {
         }
 
         //If player has no more territories, update turn again
-        if (players.get(turn).getTerritories().size() == 0) {
+        if (state != State.TERRITORY_SELECTION && players.get(turn).getTerritories().size() == 0) {
             updateTurn();
         }
     }
