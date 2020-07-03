@@ -3,6 +3,7 @@ southern_africa
 congo
 north_africa
 egypt
+middle_east
 955, 650
 977,587
 973,590

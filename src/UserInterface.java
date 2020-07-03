@@ -297,13 +297,13 @@ public class UserInterface extends JPanel {
 
                 contentPane.add(gameScreen, BorderLayout.CENTER);
 
-                //Sets frame to visible
-                gameScreen.frame.setVisible(true);
-
                 //Ensures that program exits when window is closed
                 gameScreen.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
                 //Sets resizable to false for the window
                 gameScreen.frame.setResizable(false);
+
+                //Sets frame to visible
+                gameScreen.frame.setVisible(true);
             }
         });
 

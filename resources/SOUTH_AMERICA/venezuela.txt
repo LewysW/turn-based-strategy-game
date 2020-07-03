@@ -1,5 +1,6 @@
 peru
 brazil
+central_america
 440, 591
 396,619
 400,618

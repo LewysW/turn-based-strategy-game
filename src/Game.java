@@ -254,17 +254,26 @@ public class Game {
         String msg = "Select Number of Troops to Move to Territory:";
         String title = "Tactical Move Phase";
 
-        int min = 2;
+        int min = 1;
         int max = source.getNumUnits() - 1;
 
-        int numTroops = TroopTransferDialogue.display(title, msg, min, max, true, location);
+        //Troops transferred is 1 by default
+        int numTroops = min;
+
+        //Display slider if more than 2 troops can be transferred
+        if (min < max) {
+            numTroops = TroopTransferDialogue.display(title, msg, min, max, true, location);
+        }
+
 
         //If cancel was selected
         if (numTroops == 0) {
             tacticalMovePhase.setStage(MoveStage.NONE_SELECTED);
         } else {
+            int existingTroops = players.get(turn).getTerritories().get(destination.getName()).getNumUnits();
+            
             //Add units to destination territory
-            players.get(turn).getTerritories().get(destination.getName()).setNumUnits(numTroops);
+            players.get(turn).getTerritories().get(destination.getName()).setNumUnits(existingTroops + numTroops);
 
             //Remove troops in new territory from old territory
             int newUnits = source.getNumUnits() - numTroops;

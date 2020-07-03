@@ -1,6 +1,7 @@
 argentina
 peru
 venezuela
+north_africa
 574, 699
 444,657
 445,657
