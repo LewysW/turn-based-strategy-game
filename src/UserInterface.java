@@ -75,7 +75,7 @@ public class UserInterface extends JPanel {
             new Point2D.Double(125, 510), new Point2D.Double(225, 510)};
     private static final Point2D[] whiteDiceCoords = {new Point2D.Double(70, 620), new Point2D.Double(170, 620)};
 
-    private static Rectangle turnButton = new Rectangle(70, 20, 120, 80);
+    private static Rectangle turnButton = new Rectangle(200, 15, 120, 80);
 
     private static void loadAssets() {
         //Loads in images and borders
@@ -348,6 +348,12 @@ public class UserInterface extends JPanel {
             BufferedImage currentPlayer = soldiers.get(game.getPlayers().get(game.getTurn()).getColour());
             graphics2D.drawImage(currentPlayer, 17, 10, currentPlayer.getWidth() / 4, currentPlayer.getHeight() / 4, null);
 
+            //Draw text displaying turn
+            displayTurn(graphics2D);
+            //Draw text displaying phase of game
+            displayPhase(graphics2D);
+
+
             //TODO - move to function
             //Draw troop icon in top left of display
             switch (game.getState()) {
@@ -472,6 +478,34 @@ public class UserInterface extends JPanel {
             }
         }
 
+    }
+
+    public void displayTurn(Graphics2D graphics2D) {
+        graphics2D.drawString(game.getPlayers().get(game.getTurn()).getColour().toString() + " Player's Turn", 60, 40);
+    }
+
+    public void displayPhase(Graphics2D graphics2D) {
+        String phase = "Phase: ";
+
+        switch (game.getState()) {
+            case TERRITORY_SELECTION:
+                phase += "Territory Selection";
+                break;
+            case TROOP_DEPLOYMENT:
+                phase += "Troop Deployment";
+                break;
+            case REINFORCEMENTS:
+                phase += "Reinforcement";
+                break;
+            case ATTACK_PHASE:
+                phase += "Attack";
+                break;
+            case TACTICAL_MOVE_PHASE:
+                phase += "Tactical Move";
+                break;
+        }
+
+        graphics2D.drawString(phase, 60, 70);
     }
 
     public void animateDice() {

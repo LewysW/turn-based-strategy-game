@@ -17,7 +17,7 @@ public class Game {
     private TacticalMovePhase tacticalMovePhase = new TacticalMovePhase();
     private final Point2D[] redDiceCoords = {new Point2D.Double(125, 510), new Point2D.Double(225, 510)};
     private Rectangle2D attackButton = new Rectangle2D.Double(123, 738, 95, 95);
-    private Rectangle turnButton = new Rectangle(70, 20, 120, 80);
+    private Rectangle turnButton = new Rectangle(200, 15, 120, 80);
     private Dice attackingDice = new Dice();
     private Dice defendingDice = new Dice();
 
